@@ -1,11 +1,49 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>index</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class = 'container'>
+      <table class = 'table table-striped'>
+        <form method = 'POST' action = '/postIndex'>
+          <textarea name = 'id'></textarea>
+          <textarea name = 'pw'></textarea>
+          <textarea name = 'email'></textarea>
+          <textarea name = 'name'></textarea>
+          <textarea name = 'contact'></textarea>
+          <input type = 'submit' value = 'submit'>
+        </form>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">id</th>
+            <th scope="col">pw</th>
+            <th scope="col">email</th>
+            <th scope="col">name</th>
+            <th scope="col">contact</th>
+          </tr>
+        </thead>
+        <br />
+        <br />
+        <br />
+        <tbody>
+          <% rows.forEach(function (value){ %>
+            <tr>
+              <th scope = 'row'> <%= value.user_uid %> </th>
+              <td><%= value.user_id %></td>
+              <td><%= value.user_pw %></td>
+              <td><%= value.user_email %></td>
+              <td><%= value.user_name %></td>
+              <td><%= value.user_contact %></td>
+              <td>
+                <input type = 'button' onclick = ""
+              </td>
+            </tr>
+          <%});%>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

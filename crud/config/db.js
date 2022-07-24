@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+var indexQuery = require('../query/indexQuery')
 
 const connection = mysql.createConnection({
     host:'localhost',
@@ -11,14 +12,14 @@ const connection = mysql.createConnection({
 
 // get all data
 function getAllMemos(callback){
-    connection.query(`SELECT * FROM MEMOS ORDER BY ID DESC`, (err, rows, fields) => {
+    connection.query(indexQuery.allMemo, (err, rows, fields) => {
         callback(rows);
     });
 }
 
 // insert memo data
 function insertMemo(content, callback) {
-    connection.query(`INSERT INTO MEMOS (CONTENT, CREATED_AT, UPDATED_AT) VALUES ('${content}', NOW(), NOW())`, (err, result) => {
+    connection.query(indexQuery.insertMemo, [content], (err, result) => {
         if (err) throw err;
         callback();
     });

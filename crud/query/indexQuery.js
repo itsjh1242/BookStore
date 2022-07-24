@@ -1,0 +1,3 @@
+exports.allMemo = 'SELECT * FROM MEMOS ORDER BY ID DESC';
+
+exports.insertMemo = 'INSERT INTO MEMOS (CONTENT, CREATED_AT, UPDATED_AT) VALUES (?, NOW(), NOW())';
