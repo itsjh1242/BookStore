@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    <html>
+    <%- include('../../partials/head'); %>
+    <body>
+        <header>
+          <%- include('../../partials/header', {
+            signinStatus: signinStatus,
+            userName: userName
+          }); %>
+        </header>
+    <main>
+        <div style="padding: 50px; margin: 50px auto; width: 760px; height: 500px; background-image: url('../images/bg/signup_background.jpg'); background-size: cover; border-radius: 25px; box-shadow: 1px 1px 2px 2px rgb(171, 161, 161);">
+            <form action="signup/test" method="post" enctype="multipart/form-data">
+                <input type="file" name="img" />
+                <input type="submit">
+            </form>
+            <form action = "signup" method = "post">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">ID</label>
+                    <input type="text" class="form-control" name="inputid" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">도서구매사이트입니당>_<</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="inputpw">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="inputname">
+                </div>
+                <div style="text-align: center; margin-top: 50px;" >
+                    <button type="submit" class="btn btn-primary">가입하기</button>
+                </div>
+            </form>
+        </div>
+
+    </main>
+
+    <footer>
+    <%- include('../../partials/footer'); %>
+    </footer>
+
+    </body>
+</html>

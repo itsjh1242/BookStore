@@ -1,0 +1,43 @@
+<style>
+    .Allbooks{ color: goldenrod; }
+    .inline-block-center {
+        display: inline-block;
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-bottom: 30px;
+    }
+</style>
+<div class="container-fluid">
+    <br>
+    <div class = "container-sm text-center">
+        <h1 class = "Allbooks"> All books </h1>
+    </div>
+    <br>
+    <div class="container text-center">
+        <% for(var i = 0; i < rows.length; i++){ %>
+            <% if ( i % 3 == 0 ) { %>
+                <br>
+            <% } %>
+            <div class="card inline-block-center" style="width: 18rem;">
+                <img src="../images/book/book<%= rows[i].book_num %>.jpeg" class="card-img-top" alt="..." height = "400" width = "150">
+                <div class="card-body">
+                <h5 class="card-title"><%= rows[i].book_title %></h5>
+                <p class="card-text">
+                    장르: <%= rows[i].book_genre %>
+                    <br>
+                    가격: <%= rows[i].book_price %>
+                    <br>
+                    한 줄 소개: <%= rows[i].book_info %>
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        <% }; %>
+    </div>
+</div>
+
+<!-- <% for(var j = 0; j < 3; j++){ %>
+    <div class = "col">
+        test
+    </div>
+<% }; %> -->

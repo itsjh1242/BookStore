@@ -1,33 +1,57 @@
 var express = require('express');
 var router = express.Router();
+var connection = require('../database/db');
+var session = require('express-session');
+var MySQLStore = require('express-mysql-session');
 
+const cMain = require('../controllers/mainController');
 
-const indexController = require('../controllers/indexController');
+var options={
+    host:'localhost',
+    user: 'root',
+    password: 'itsjh0112',
+    port: 3306,
+    database: 'node_db'
+};
+var sessionStore = new MySQLStore(options);
 
-//  index info
-// router.get('/', function(req, res, next) {
-//     indexController.getAllIndex((rows) => {
-//         res.render('index', {rows : rows});
-//     });
-// });
+router.use(
+    session({
+        secret: 'asdqweasdasd',
+        resave: false,
+        saveUninitialized: true,
+        store: sessionStore
+    })
+);
 
-// post index
-// router.post('/postIndex', function(req, res, next){
-//     let param = JSON.parse(JSON.stringify(req.body));
-//     indexController.postIndexValue(
-//         param['id'],
-//         param['pw'],
-//         param['email'],
-//         param['name'],
-//         param['contact'], () => {
-//             res.redirect('/');
-//         }
-//     );
-// });
 
 // Main Page
-router.get('/', function(req, res, next){
-    res.render('');
-})
+router.get('/', function(req, res){
+    cMain.getBestSeller((rows) => {
+        try{
+            if (req.session.uid){
+                res.render('index', {
+                    rows: rows,
+                    page: './main/main',
+                    best: './bestSeller',
+                    content: './content',
+                    signinStatus: true,
+                    userName: req.session.userName
+                });
+            } else {
+                res.render('index', {
+                    rows: rows,
+                    page: './main/main',
+                    best: './bestSeller',
+                    content: './content',
+                    signinStatus: false,
+                    userName: false
+                });
+            }
+            } catch (err1){
+                throw err1;
+            } 
+        });
+    });
 
 module.exports = router;

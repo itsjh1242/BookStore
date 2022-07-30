@@ -9,7 +9,8 @@ const connection = mysql.createConnection({
     user: 'root',
     password: 'itsjh0112',
     port: 3306,
-    database: 'node_db'
+    database: 'node_db',
+    multipleStatements : true
 })
 
 module.exports = connection;

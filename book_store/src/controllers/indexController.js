@@ -1,7 +1,7 @@
 const connection = require('../database/db');
-var indexQuery = require('../query/indexQuery');
+var qMain = require('../query/mainQuery');
 
-
+/* Test 
 function getAllIndex(callback){
     connection.query(indexQuery.getAllIndex, (err, rows, fields) => {
         callback(rows);
@@ -20,9 +20,8 @@ function deleteIndex(id, callback){
         callback();
     })
 }
+*/
+
 
 module.exports = {
-    getAllIndex,
-    postIndexValue,
-    deleteIndex
 }

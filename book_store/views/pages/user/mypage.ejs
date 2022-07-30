@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+    <html>
+        <%- include('../../partials/head'); %>
+    <style>
+        .wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50px;
+        }
+        .mypageform input{
+            display: inline;
+            margin: 50px 0 50px;
+            width: 300px; height: 300px;
+            border-radius: 30px;
+            border-style: none;
+            background-color: beige;
+            font: italic bold 1.5em/1em Georgia, serif ;
+        }
+    </style>
+    
+    <body>
+        <header>
+          <%- include('../../partials/header', {
+            signinStatus: signinStatus,
+            userName: userName
+          }); %>
+        </header>
+    <main>
+
+        <div class="wrapper">
+            <form class="mypageform">
+                <input id = "mypage" type = "button" value = "마이페이지" onmouseover="mouseover(this.id)" onmouseout="mouseout(this.id)">
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input id = "orderlist" type = "button" value = "주문내역" onmouseover="mouseover(this.id)" onmouseout="mouseout(this.id)">
+            </form>
+        </div>
+        
+    </main>
+
+    <footer>
+        <%- include('../../partials/footer'); %>
+    </footer>
+
+    <script>
+        function mouseover(x){
+            document.getElementById(x).style.background = '#F1E7E4'
+        }
+        function mouseout(x){
+            document.getElementById(x).style.background = 'beige'
+        }
+    </script>
+
+    </body>
+</html>

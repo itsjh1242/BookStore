@@ -1,0 +1,55 @@
+<style>
+    .bestSeller{ color: orange; }
+    .inline-block-center {
+        display: inline-block;
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-bottom: 30px;
+    }
+</style>
+<div class="container-fluid">
+    <br>
+    <div class = "container-sm text-center">
+        <h1 class = "bestSeller"> Best Seller </h1>
+    </div>
+    <br>
+    <div class="container text-center">
+        <% for(var i = 0; i < 3; i++) { %>
+            <div class="card inline-block-center" style="width: 18rem;">
+                <img src="../images/book/book<%= rows[i].book_num %>.jpeg" class="card-img-top" alt="..." height = "400" width = "150">
+                <div class="card-body">
+                <h5 class="card-title"><%= rows[i].book_title %></h5>
+                <h6 class = "card-text"> 가격: <%= rows[i].book_price %> </h6>
+                <p class="card-text">판매량: <%= rows[i].book_salesRate %></p>
+                <a href="#" class="btn btn-primary">보러가기</a> 
+                </div>
+            </div>
+        <% }; %>
+    </div>
+    <br>
+</div>
+
+<!-- <div class = "container-sm text-center">
+    <h1 class = "bestSeller"> Best Seller </h1>
+</div>
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="width: 50;">
+    <div class="carousel-inner">
+    <div class="carousel-item active">
+        <img src="../images/book/book<%= rows[0].book_num %>.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+        <img src="../images/book/book<%= rows[1].book_num %>.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+        <img src="../images/book/book<%= rows[2].book_num %>.jpg" class="d-block w-100" alt="...">
+    </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+    </button>
+</div> -->

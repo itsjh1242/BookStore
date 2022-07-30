@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+    <html>
+    <%- include('../../partials/head'); %>
+    <body>
+        <header>
+          <%- include('../../partials/header', {
+            signinStatus: signinStatus,
+            userName: userName
+          }); %>
+        </header>
+    <main>
+        <!-- <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">login Failed</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>check your id or pw</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div> -->
+
+        <div class="card text-center" style="margin: 100px auto; width: 700px;">
+            <div class="card-header">
+            Login
+            </div>
+            <div class="card-body">
+                <div style = "margin: 50px auto; width: 500px;">
+                    <form action = "signin" method = "post">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">ID&nbsp&nbsp</span>
+                            <input name = 'id' type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">PW</span>
+                            <input name = 'pw' type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary">로그인</button>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="card-footer text-muted">
+              <a class="nav-link active" aria-current="page" href="#" style = "display: inline-block;"> 아이디 & 비밀번호 찾기 </a>
+              &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+              <a class="nav-link active" aria-current="page" href="signup" style = "display: inline-block;"> 회원가입 </a>
+            </div>
+          </div>
+
+             <!-- Modal -->
+          <!-- <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: block;" aria-modal="true" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-backdrop fade show"></div> -->
+    </main>
+
+    <footer>
+    <%- include('../../partials/footer'); %>
+    </footer>
+
+    </body>
+</html>
