@@ -12,8 +12,8 @@
 </h2>
 <ul>
   <li> <a href="https://github.com/itsjh1242/Node.js/tree/main/book_store"> Book Store Beta</a> </li>
-  <dt> 🙈 Node.js 공부 목적으로 만든 도서구매사이트 </dt>
-  <h3> MySQL 연동 </h3>
+  <h3> 🙈 Node.js 공부 목적으로 만든 도서구매사이트 </h3>
+  <dt> MySQL 연동 </dt>
 </ul>
 <br>
 <h2>
