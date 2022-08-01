@@ -1,3 +1,3 @@
 # NodeJS
  
-![title](./img/node.js.png){: width = "300px" height = "200px"}
+![title](./img/node.js.png =300x200)
