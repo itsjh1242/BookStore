@@ -16,7 +16,7 @@ router.get('/', function(req, res){
                 userName: req.session.userName
             });
         } else{
-            res.render('user/mypage', {
+            res.render('/', {
                 signinStatus: false,
                 userName: false
             });
@@ -24,7 +24,7 @@ router.get('/', function(req, res){
     } catch (err1) {
         throw (err1);
     }
-});
+})
 
 router.post("/test", upload.single("img"), async (req, res) => {
     const imgfile = req.file;
@@ -33,7 +33,7 @@ router.post("/test", upload.single("img"), async (req, res) => {
         signinStatus: false,
         userName: false
     });
-});
+})
   
 
 module.exports = router;

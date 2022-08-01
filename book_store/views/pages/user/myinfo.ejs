@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+    <html>
+    <%- include('../../partials/head'); %>
+
+    <style>
+        .wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50px; min-width: 100px;
+        }
+        .content{
+            margin: 2rem;
+            border-radius: 30px;
+            background-color: #FAFAFA;
+            width: 960px; height: 500px;
+        }
+    </style>
+
+    <body>
+        <header>
+          <%- include('../../partials/header', {
+            signinStatus: signinStatus,
+            userName: userName
+          }); %>
+        </header>
+    <main>
+
+        <div class="wrapper">
+            <div class = "content">
+                <form style="margin: 30px;">
+                    <label for="id_text" class="form-label">아이디: <%= rows[0].user_id %></label>
+                    <div class="mb-3">
+                      <label for="pw_text" class="form-label">비밀번호</label>
+                      <input type="text" class="form-control" id="pw" placeholder="<%= rows[0].user_pw%>">
+                    </div>
+                    <label style="display: block;" for="name" class="form-label">이름: <%= rows[0].user_name %></label>
+                    <div class="mb-3">
+                        <label for="destination_text" class="form-label">배송지</label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected> 배송지 목록 </option>
+                            <% for(var i = 0; i < address.length; i++){ %>
+                                <option value = " <%= i + 1 %>"> <%= address[i].postNum %> <%= address[i].address1 %> <%= address[i].address2 %></option>
+                            <% }; %>
+                        </select>
+                        <input type="text" class="form-control" id="dtn" placeholder="<%= address[0].address1 %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="card_text" class="form-label">카드</label>
+                        <input type="text" class="form-control" id="card">
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <button type="submit" class="btn btn-primary">저장</button>
+                    </div>
+                    
+                  </form>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer>
+        <%- include('../../partials/footer'); %>
+    </footer>
+    </body>
+</html>

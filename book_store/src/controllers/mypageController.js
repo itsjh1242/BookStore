@@ -1,14 +1,20 @@
 const connection = require('../database/db');
-var qMain = require('../query/mainQuery');
+var qMypage = require('../query/mypageQuery');
 
-// Main Page
-// Best Seller
-function getBestSeller(callback){
-    connection.query(qMain.getBestSeller, (err, rows) => {
+// myPage
+function userInfo(id, callback){
+    connection.query(qMypage.signin, [id], (err, rows) => {
         callback(rows);
     });
 }
 
+function getAddress(id, callback){
+    connection.query(qMypage.getAddress, [id], (err, address) => {
+        callback(address);
+    });
+}
+
 module.exports = {
-    getBestSeller
+    userInfo,
+    getAddress
 }
