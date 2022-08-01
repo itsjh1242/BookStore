@@ -13,7 +13,6 @@
 <ul>
   <li> <a href="https://github.com/itsjh1242/Node.js/tree/main/book_store"> Book Store Beta</a> </li>
   <dt>dt</dt>
-  <dd>dd</dd>
 </ul>
 <br>
 <h2>
