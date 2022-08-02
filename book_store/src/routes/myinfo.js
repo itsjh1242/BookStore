@@ -34,7 +34,7 @@ router.post('/', function(req, res){
     let newpw = req.body.newpw;
     let input = req.body.Editedaddress;
     let select = req.body.select;
-    let indexNum = req.body.hiddenInput;
+    let indexNum = req.body.hiddenIndex;
     let deleteStatus = req.body.hiddenInputDelete;
 
     if (deleteStatus === "ok" && input !== ""){
@@ -52,7 +52,6 @@ router.post('/', function(req, res){
         cMyPage.getAddress(id, (address) => {
             if (address.length < 2){
                 cMyPage.addAddress(id, addr, postnum);
-                res.redirect('/info');
             };
         });
     };

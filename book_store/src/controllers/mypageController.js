@@ -1,5 +1,5 @@
 const connection = require('../database/db');
-var qMypage = require('../query/mypageQuery');
+var qMypage = require('../query/mypageQuery'); 
 
 // myPage
 function userInfo(id, callback){

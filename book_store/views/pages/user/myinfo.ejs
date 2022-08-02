@@ -40,11 +40,12 @@
                         <select name = "select" id = "formSelect" class="form-select" aria-label="Default select example" onchange="selectOnChange(this)">
                             <option selected> ---배송지 추가--- </option>
                             <% for(var i = 0; i < address.length; i++){ %>
-                                <option value = " <%= i + 1 %>"> <%= address[i].postNum %> <%= address[i].address1 %></option>
+                                <option value = "<%= i + 1 %>"><%= address[i].indexNum %>. <%= address[i].postNum %> <%= address[i].address1 %></option>
                             <% }; %>
                         </select>
-                        <input name = "hiddenInput" id = "hiddenInput" type="hidden" value = "">
                         <input name = "hiddenInputDelete" id = "hiddenInputDelete" type = "hidden" value = "">
+                        <input name = "hiddenIndex" id = "hiddenIndex" type = "hidden" value = "">
+
                         <input name = "Editedaddress" style="margin: 5px 0 5px;" type="text" class="form-control" id="inputaddress">
                         <input class="btn btn-primary" type="submit" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
                         <input class="btn btn-success" type="submit" value="추가">
@@ -74,8 +75,12 @@
                 // input에 선택된 option 값 넣기
                 document.getElementById("inputaddress").value = target.options[target.selectedIndex].text;
 
-                document.getElementById("hiddenInput").value = target.selectedIndex;            
+                document.getElementById("hiddenIndex").value = target.options[target.selectedIndex].text[0];
             }
+        }
+
+        function getIndex(target){
+            
         }
 
         function sample6_execDaumPostcode() {
