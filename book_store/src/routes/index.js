@@ -53,5 +53,10 @@ router.get('/', function(req, res){
             } 
         });
     });
+router.get('/', function(req, res){
+    res.render('html', {
+        name: req.session.uid
+    })
+})
 
 module.exports = router;

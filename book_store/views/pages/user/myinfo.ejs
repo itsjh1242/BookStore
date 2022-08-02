@@ -37,13 +37,18 @@
                     <label style="display: block;" for="name" class="form-label">이름: <%= rows[0].user_name %></label>
                     <div class="mb-3">
                         <label for="destination_text" class="form-label">배송지</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" onchange="selectOnChange(this)">
                             <option selected> 배송지 목록 </option>
                             <% for(var i = 0; i < address.length; i++){ %>
-                                <option value = " <%= i + 1 %>"> <%= address[i].postNum %> <%= address[i].address1 %> <%= address[i].address2 %></option>
+                                <option value = " <%= i + 1 %>"> <%= address[i].postNum %> <%= address[i].address1 %></option>
                             <% }; %>
                         </select>
-                        <input type="text" class="form-control" id="dtn" placeholder="<%= address[0].address1 %>">
+                        <input style="margin: 5px 0 5px;" type="text" class="form-control" id="inputaddress">
+                        <input class="btn btn-primary" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+                        <input class="btn btn-primary" type="button" onclick="clickedEdit()" value="수정">
+                        <input class="btn btn-primary" type="button" onclick="sample6_execDaumPostcode()" value="삭제">
+                        <input type="hidden" id = "postNumHidden" value = ""> 
+                        <input type="hidden" id = "addrHidden" value = ""> 
                     </div>
                     <div class="mb-3">
                         <label for="card_text" class="form-label">카드</label>
@@ -58,7 +63,48 @@
         </div>
         
     </main>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        function clickedEdit(){
+            var postNum = document.getElementById("postNumHidden").value;
+            var addr = document.getElementById("addrHidden").value;
+            if (postNum === "" || addr === ""){
+                alert("배송지를 선택해주세요.");
+            }
+        }
 
+        function selectOnChange(target){
+            if (target.selectedIndex !== 0){
+                // input에 선택된 option 값 넣기
+                document.getElementById("inputaddress").value = target.options[target.selectedIndex].text;
+                // hidden input에 선택된 PostNum과 Addr를 삽입
+                document.getElementById("postNumHidden").value = address[target.selectedIndex - 1].postNum;
+                document.getElementById("addrHidden").value = address[target.selectedIndex - 1].address1;
+            }
+        }
+
+        function sample6_execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+    
+                    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var addr = ''; // 주소 변수
+    
+                    //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                    if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                        addr = data.roadAddress;
+                    } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                        addr = data.jibunAddress;
+                    }
+                    document.getElementById("inputaddress").value = data.zonecode + " " + addr;
+                    document.getElementById("postNumHidden").value = data.zonecode;
+                    document.getElementById("addrHidden").value = addr;
+                }
+            }).open();
+        }
+    </script>
     <footer>
         <%- include('../../partials/footer'); %>
     </footer>
