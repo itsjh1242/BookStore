@@ -41,7 +41,7 @@ router.get('/', function(req, res){
             });
         }
     } catch (err1) {
-        throw (err1);
+        throw (err1); 
     }
 });
 

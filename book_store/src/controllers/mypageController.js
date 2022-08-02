@@ -14,7 +14,28 @@ function getAddress(id, callback){
     });
 }
 
+function editAddress(addr, postnum, indexNum){
+    connection.query(qMypage.editAddress, [addr, postnum, indexNum]);
+}
+
+function editpw(pw, postnum){
+    connection.query(qMypage.editpw, [pw, postnum]);
+}
+
+function addAddress(id, addr, postnum){
+    connection.query(qMypage.addAddress, [id, addr, postnum]);
+}
+
+function deleteAddress(indexNum){
+    connection.query(qMypage.deleteAddress, [indexNum]);
+}
+
+
 module.exports = {
     userInfo,
-    getAddress
+    getAddress,
+    editAddress,
+    editpw,
+    addAddress,
+    deleteAddress
 }
