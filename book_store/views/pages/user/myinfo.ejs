@@ -73,7 +73,7 @@
         function selectOnChange(target){
             if (target.selectedIndex !== 0){
                 // input에 선택된 option 값 넣기
-                document.getElementById("inputaddress").value = target.options[target.selectedIndex].text;
+                document.getElementById("inputaddress").value = target.options[target.selectedIndex].text.substring(3);
 
                 document.getElementById("hiddenIndex").value = target.options[target.selectedIndex].text[0];
             }
