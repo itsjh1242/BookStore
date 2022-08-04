@@ -18,3 +18,6 @@ exports.deleteAddress = 'DELETE FROM address WHERE indexNum =?';
 
 // get card
 exports.getCard = 'SELECT * FROM credit WHERE user_id = ?';
+
+// add card
+exports.addCard = 'INSERT INTO credit (user_id, cardnum, cardexp, indexNum, cardtype, cash) VALUES (?, ?, ?, null, ?, 0)'

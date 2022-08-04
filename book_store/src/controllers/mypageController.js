@@ -36,6 +36,10 @@ function getCard(id, callback){
     })
 }
 
+function addCard(id, cardnum, cardexp, cardtype){
+    connection.query(qMypage.addCard, [id, cardnum, cardexp, cardtype]);
+}
+
 
 module.exports = {
     userInfo,
@@ -44,5 +48,6 @@ module.exports = {
     editpw,
     addAddress,
     deleteAddress,
-    getCard
+    getCard,
+    addCard
 }

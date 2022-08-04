@@ -15,6 +15,70 @@
             background-color: #FAFAFA;
             width: 960px; height: auto;
         }
+        .con_img{
+            position: relative;
+        }
+        .con_card1{
+            position: absolute;
+            color: black;
+            top: 140px; left: 135px;
+        }
+        .con_card2{
+            position: absolute;
+            color: black;
+            top: 140px; left: 485px;
+        }
+        .con_card3{
+            position: absolute;
+            color: black;
+            top: 140px; left: 170px;
+        }
+        .con_exp1{
+            position: absolute;
+            color: black;
+            top: 110px; left: 300px;
+        }
+        .con_exp2{
+            position: absolute;
+            color: black;
+            top: 110px; left: 650px;
+        }
+        .con_exp3{
+            position: absolute;
+            color: black;
+            top: 110px; left: 330px;
+        }
+        .con_type1{
+            position: absolute;
+            color: black;
+            top: 40px; left: 330px; 
+        }
+        .con_type2{
+            position: absolute;
+            color: black;
+            top: 40px; left: 680px; 
+        }
+        .con_type3{
+            position: absolute;
+            color: black;
+            top: 110px; left: 330px; 
+        }
+        .del_card1{
+            position: absolute;
+            color: black;
+            top: 20px; left: 130px;
+        }
+        .del_card2{
+            position: absolute;
+            color: black;
+            top: 20px; left: 470px;
+        }
+        .del_card3{
+            position: absolute;
+            color: black;
+            top: 20px; left: 160px;
+        }
+        
     </style>
 
     <body>
@@ -55,26 +119,88 @@
                     </div>
                     <div class="mb-3">
                         <label for="card_text" class="form-label">카드</label>
-                        <div class="wrapper">
+                        <div class="wrapper con_img" style="min-width: 900;">
                             <% if (card.length === 2){ %>
-                                <p> 2 </p>
+                                <div id = "card1">
+                                    <img src="../images/etc/creditcard.png" alt="..." width="350px;">
+                                    <h4 class="con_card1">
+                                        <%= card[0].cardnum.substr(0,4)%>-<%= card[0].cardnum.substr(4,4)%>-<%= card[0].cardnum.substr(8,4)%>-<%= card[0].cardnum.substr(12)%>
+                                    </h4>
+                                    <h4 class="con_exp1">
+                                        <%= card[0].cardexp.substr(0,2) %>&nbsp/&nbsp<%= card[0].cardexp.substr(2) %>
+                                    </h4>
+                                    <h4 class="con_type1">
+                                        <% if(card[0].cardtype === "typevisa"){ %>
+                                            VISA
+                                        <% } else { %>
+                                            MASTER
+                                        <% } %>
+                                    </h4>
+                                    <input id = "card1" onclick = "delcardFunc(this.id)" value = "<%= card[0].cardnum %>" class = "del_card1" type="button" value = "X" style="background-color: white; color: red;">
+                                </div>
+                                <div id = "card2">
+                                    <img src="../images/etc/creditcard.png" alt="..." width="350px;">
+                                    <h4 class="con_card2">
+                                        <%= card[1].cardnum.substr(0,4)%>-<%= card[1].cardnum.substr(4,4)%>-<%= card[1].cardnum.substr(8,4)%>-<%= card[1].cardnum.substr(12)%>
+                                    </h4>
+                                    <h4 class="con_exp2">
+                                        <%= card[1].cardexp.substr(0,2) %>&nbsp/&nbsp<%= card[1].cardexp.substr(2) %>
+                                    </h4>
+                                    <h4 class="con_type2">
+                                        <% if(card[1].cardtype === "typevisa"){ %>
+                                            VISA
+                                        <% } else { %>
+                                            MASTER
+                                        <% } %>
+                                    </h4>
+                                    <input id = "card2" onclick = "delcardFunc(this.id)" value = "<%= card[1].cardnum %>" class = "del_card2" type="button" value = "X" style="background-color: white; color: red;">
+                                </div>
                             <% } else if (card.length === 1){ %>
+                                <div id="card3">
+                                    <img src="../images/etc/creditcard.png" alt="..." width="350px;">
+                                    <h4 class="con_card3">
+                                        <%= card[0].cardnum.substr(0,4)%>-<%= card[0].cardnum.substr(4,4)%>-<%= card[0].cardnum.substr(8,4)%>-<%= card[0].cardnum.substr(12)%>
+                                    </h4>
+                                    <h4 class="con_exp3">
+                                        <%= card[0].cardexp.substr(0,2) %>&nbsp/&nbsp<%= card[0].cardexp.substr(2) %>
+                                    </h4>
+                                    <h4 class="con_type3">
+                                        <% if(card[0].cardtype === "typevisa"){ %>
+                                            VISA
+                                        <% } else { %>
+                                            MASTER
+                                        <% } %>
+                                    </h4>
+                                    <input id = "card3" onclick = "delcardFunc(this.id)" value = "<%= card[0].cardnum %>" class = "del_card3" type="button" value = "X" style="background-color: white; color: red;">
+                                </div>
                                 <input style="color: green; background-color: white; font-size: 3rem; width: 100px; height: 100px; margin: 0 180px 0 0;" type="button" onclick="cardFunc()" value = "+">
-                                <p> 1 </p>
                             <% } else { %>
                                 <input style="color: green; background-color: white; font-size: 3rem; width: 100px; height: 100px; margin: 0 180px 0 0;" type="button" onclick="cardFunc()" value = "+">
                                 <input style="color: green; background-color: white; font-size: 3rem; width: 100px; height: 100px; margin: 0 0 0 180px;" type="button" onclick="cardFunc()" value = "+">
                             <% } %>
                         </div>
-                        <div id = "cardInputDiv" class="wrapper" style="margin-top: 10px; display: none;">
-                            <label for="destination_text" class="form-label" style="margin-right: 10px;">카드 번호</label>
-                            <input name = "cardNum1" style="margin :0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum1">
-                            -
-                            <input name = "cardNum1" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum1">
-                            -
-                            <input name = "cardNum1" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum1">
-                            -
-                            <input name = "cardNum1" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum1">
+                        <div id = "cardInputDiv" style="margin-top: 10px; display: none;">
+                            <div class="wrapper">
+                                <label for="destination_text" class="form-label" style="margin-right: 10px;">카드 번호</label>
+                                <input name = "cardNum1" style="margin :0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum1">
+                                -
+                                <input name = "cardNum2" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum2">
+                                -
+                                <input name = "cardNum3" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum3">
+                                -
+                                <input name = "cardNum4" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum4">
+                            </div>
+                            <div class="wrapper">
+                                <label for="destination_text" class="form-label" style="margin-right: 10px;">유효기간</label>
+                                <input name = "cardExpM" style = "width: 80px;" type="number" class = "form-control" id = "cardExpM" placeholder="MM" min=1 max=12>
+                                <strong>&nbsp&nbsp/&nbsp&nbsp</strong>
+                                <input name = "cardExpY" style = "width: 80px;" type="number" class = "form-control" id = "cardExpY" placeholder="YY" min=1 max=31>
+                            </div>
+                            <div class="wrapper">
+                                <label for="destination_text" class="form-label" style="margin-right: 10px;">카드 유형</label>
+                                <input name = "cardType" type="radio" value="typevisa"> <strong>&nbspVISA</strong>&nbsp&nbsp&nbsp&nbsp
+                                <input name = "cardType" type="radio" value="typemaster"> <strong>&nbspMASTER</strong>
+                            </div>
                         </div>
                     </div>
                     <div style="display: flex; justify-content: center; align-items: center;">
@@ -87,8 +213,16 @@
     </main>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
+        function delcardFunc(id){
+            let current_element = document.getElementById(id);
+            let parent_element = current_element.parentNode;
+            parent_element.type = "hidden";
+            console.log(parent_element);
+            
+        }
         function cardFunc(){
-            document.getElementById("cardInputDiv").style.display = ""
+            document.getElementById("cardInputDiv").style.display = "";
+            document.getElementById("hiddenStatusCard").value = "card";
         }
 
         function deleteFunc(target){

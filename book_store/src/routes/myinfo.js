@@ -41,11 +41,40 @@ router.post('/', function(req, res){
     let StatusDel = req.body.hiddenStatus;
     let StatusCard = req.body.hiddenStatusCard;
 
+
+
     if (StatusDel === "delete" && input !== ""){
         cMyPage.deleteAddress(indexNum);
     }
 
     if (StatusCard === "card"){
+        try{
+            let cardnum =
+            req.body.cardNum1.toString()
+            + req.body.cardNum2.toString()
+            + req.body.cardNum3.toString()
+            + req.body.cardNum4.toString();
+            let expM = req.body.cardExpM.toString();
+            let expY = req.body.cardExpY.toString();
+            /* 유효기간 입력 값 정렬 ex. 01 02 03... */
+            if (expM.length < 2){
+                expM = "0" + expM;
+            };
+            if (expY.length < 2){
+                expY = "0" + expY;
+            };
+            let cardexp = expM + expY;
+            let cardtype = req.body.cardType;
+            cMyPage.getCard(req.session.uid, (card) => {
+                if(card.length < 2){
+                    cMyPage.addCard(req.session.uid, cardnum, cardexp, cardtype);
+                }
+            })
+        } catch (err1){
+            throw err1;
+        }
+        
+
     }
 
     if (select === "---배송지 추가---" && input !== ""){
@@ -65,7 +94,6 @@ router.post('/', function(req, res){
 
     if (newpw !== ""){
         cMyPage.editpw(newpw, id);
-        res.redirect('/info');
     }
 
     if (input !== ""){
@@ -78,13 +106,13 @@ router.post('/', function(req, res){
         }
         try{
             cMyPage.editAddress(addr, postnum, indexNum);
-            res.redirect('/info');
         } catch (err1) {
             throw err1;
         }
     } else {
         res.redirect('/info');
     }
+    res.redirect('/info');
 });
 
 
