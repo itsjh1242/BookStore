@@ -30,6 +30,12 @@ function deleteAddress(indexNum){
     connection.query(qMypage.deleteAddress, [indexNum]);
 }
 
+function getCard(id, callback){
+    connection.query(qMypage.getCard, [id], (err, card) => {
+        callback(card);
+    })
+}
+
 
 module.exports = {
     userInfo,
@@ -37,5 +43,6 @@ module.exports = {
     editAddress,
     editpw,
     addAddress,
-    deleteAddress
+    deleteAddress,
+    getCard
 }

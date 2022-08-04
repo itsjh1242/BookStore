@@ -1,7 +1,7 @@
 // ------------ myPage Page ------------
 exports.signin = 'SELECT * FROM user WHERE user_id = ?';
 
-// adress
+// get adress
 exports.getAddress = 'SELECT * FROM address WHERE user_id = ?';
 
 // edit address
@@ -15,3 +15,6 @@ exports.addAddress = 'INSERT INTO address VALUES (?, ?, ?, null)';
 
 // delete Address
 exports.deleteAddress = 'DELETE FROM address WHERE indexNum =?';
+
+// get card
+exports.getCard = 'SELECT * FROM credit WHERE user_id = ?';

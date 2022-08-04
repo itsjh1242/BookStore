@@ -13,7 +13,7 @@
             margin: 2rem;
             border-radius: 30px;
             background-color: #FAFAFA;
-            width: 960px; height: 500px;
+            width: 960px; height: auto;
         }
     </style>
 
@@ -43,18 +43,39 @@
                                 <option value = "<%= i + 1 %>"><%= address[i].indexNum %>. <%= address[i].postNum %> <%= address[i].address1 %></option>
                             <% }; %>
                         </select>
-                        <input name = "hiddenInputDelete" id = "hiddenInputDelete" type = "hidden" value = "">
+                        <input name = "hiddenStatus" id = "hiddenStatus" type = "hidden" value = "">
+                        <input name = "hiddenStatusCard" id = "hiddenStatusCard" type = "hidden" value = "">
                         <input name = "hiddenIndex" id = "hiddenIndex" type = "hidden" value = "">
 
                         <input name = "Editedaddress" style="margin: 5px 0 5px;" type="text" class="form-control" id="inputaddress">
-                        <input class="btn btn-primary" type="submit" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+                        <input class="btn btn-primary" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
                         <input class="btn btn-success" type="submit" value="추가">
                         <input class="btn btn-warning" type="submit" onclick="clickedEdit()" value="수정">
                         <input class="btn btn-danger" type="submit" value="삭제" onclick="deleteFunc()">
                     </div>
                     <div class="mb-3">
                         <label for="card_text" class="form-label">카드</label>
-                        <input type="text" class="form-control" id="card">
+                        <div class="wrapper">
+                            <% if (card.length === 2){ %>
+                                <p> 2 </p>
+                            <% } else if (card.length === 1){ %>
+                                <input style="color: green; background-color: white; font-size: 3rem; width: 100px; height: 100px; margin: 0 180px 0 0;" type="button" onclick="cardFunc()" value = "+">
+                                <p> 1 </p>
+                            <% } else { %>
+                                <input style="color: green; background-color: white; font-size: 3rem; width: 100px; height: 100px; margin: 0 180px 0 0;" type="button" onclick="cardFunc()" value = "+">
+                                <input style="color: green; background-color: white; font-size: 3rem; width: 100px; height: 100px; margin: 0 0 0 180px;" type="button" onclick="cardFunc()" value = "+">
+                            <% } %>
+                        </div>
+                        <div id = "cardInputDiv" class="wrapper" style="margin-top: 10px; display: none;">
+                            <label for="destination_text" class="form-label" style="margin-right: 10px;">카드 번호</label>
+                            <input name = "cardNum1" style="margin :0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum1">
+                            -
+                            <input name = "cardNum1" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum1">
+                            -
+                            <input name = "cardNum1" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum1">
+                            -
+                            <input name = "cardNum1" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum1">
+                        </div>
                     </div>
                     <div style="display: flex; justify-content: center; align-items: center;">
                         <button type="submit" class="btn btn-primary">저장</button>
@@ -66,8 +87,12 @@
     </main>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
+        function cardFunc(){
+            document.getElementById("cardInputDiv").style.display = ""
+        }
+
         function deleteFunc(target){
-            document.getElementById("hiddenInputDelete").value = "ok";
+            document.getElementById("hiddenStatus").value = "delete";
         }
 
         function selectOnChange(target){
@@ -77,10 +102,6 @@
 
                 document.getElementById("hiddenIndex").value = target.options[target.selectedIndex].text[0];
             }
-        }
-
-        function getIndex(target){
-            
         }
 
         function sample6_execDaumPostcode() {

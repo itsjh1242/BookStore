@@ -10,11 +10,14 @@ router.get('/', function(req, res){
         if(req.session.uid){
             cMyPage.userInfo(req.session.uid, (rows) => {
                 cMyPage.getAddress(req.session.uid, (address) => {
-                    res.render('user/myinfo', {
-                        signinStatus: true,
-                        userName: req.session.userName,
-                        rows: rows,
-                        address: address
+                    cMyPage.getCard(req.session.uid, (card) => {
+                        res.render('user/myinfo', {
+                            signinStatus: true,
+                            userName: req.session.userName,
+                            rows: rows,
+                            address: address,
+                            card: card
+                        });
                     });
                 });
             });
@@ -35,10 +38,14 @@ router.post('/', function(req, res){
     let input = req.body.Editedaddress;
     let select = req.body.select;
     let indexNum = req.body.hiddenIndex;
-    let deleteStatus = req.body.hiddenInputDelete;
+    let StatusDel = req.body.hiddenStatus;
+    let StatusCard = req.body.hiddenStatusCard;
 
-    if (deleteStatus === "ok" && input !== ""){
+    if (StatusDel === "delete" && input !== ""){
         cMyPage.deleteAddress(indexNum);
+    }
+
+    if (StatusCard === "card"){
     }
 
     if (select === "---배송지 추가---" && input !== ""){
@@ -54,12 +61,12 @@ router.post('/', function(req, res){
                 cMyPage.addAddress(id, addr, postnum);
             };
         });
-    };
+    }
 
     if (newpw !== ""){
         cMyPage.editpw(newpw, id);
         res.redirect('/info');
-    };
+    }
 
     if (input !== ""){
         var splitVal = input.split(' ');
@@ -70,14 +77,14 @@ router.post('/', function(req, res){
             addr += splitAddr[i];
         }
         try{
-            cMyPage.getAddress(id, (address) => {
-                cMyPage.editAddress(addr, postnum, indexNum);
+            cMyPage.editAddress(addr, postnum, indexNum);
             res.redirect('/info');
-            });
         } catch (err1) {
             throw err1;
         }
-    };
+    } else {
+        res.redirect('/info');
+    }
 });
 
 
