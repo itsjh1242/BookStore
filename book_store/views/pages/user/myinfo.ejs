@@ -31,7 +31,7 @@
         .con_card3{
             position: absolute;
             color: black;
-            top: 140px; left: 170px;
+            top: 140px; left: 300px;
         }
         .con_exp1{
             position: absolute;
@@ -46,7 +46,7 @@
         .con_exp3{
             position: absolute;
             color: black;
-            top: 110px; left: 330px;
+            top: 110px; left: 480px;
         }
         .con_type1{
             position: absolute;
@@ -61,7 +61,7 @@
         .con_type3{
             position: absolute;
             color: black;
-            top: 110px; left: 330px; 
+            top: 40px; left: 500px; 
         }
         .del_card1{
             position: absolute;
@@ -110,6 +110,8 @@
                         <input name = "hiddenStatus" id = "hiddenStatus" type = "hidden" value = "">
                         <input name = "hiddenStatusCard" id = "hiddenStatusCard" type = "hidden" value = "">
                         <input name = "hiddenIndex" id = "hiddenIndex" type = "hidden" value = "">
+                        <input name = "hiddenDelCard" id = "hiddenDelCard" type = "hidden" value = "">
+                        <input name = "cardDiv" id = "cardDiv" type = "hidden" value = "">
 
                         <input name = "Editedaddress" style="margin: 5px 0 5px;" type="text" class="form-control" id="inputaddress">
                         <input class="btn btn-primary" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
@@ -121,7 +123,7 @@
                         <label for="card_text" class="form-label">카드</label>
                         <div class="wrapper con_img" style="min-width: 900;">
                             <% if (card.length === 2){ %>
-                                <div id = "card1">
+                                <div id = "card1div" name = "card1" value = "<%= card[0].cardnum %>">
                                     <img src="../images/etc/creditcard.png" alt="..." width="350px;">
                                     <h4 class="con_card1">
                                         <%= card[0].cardnum.substr(0,4)%>-<%= card[0].cardnum.substr(4,4)%>-<%= card[0].cardnum.substr(8,4)%>-<%= card[0].cardnum.substr(12)%>
@@ -136,9 +138,8 @@
                                             MASTER
                                         <% } %>
                                     </h4>
-                                    <input id = "card1" onclick = "delcardFunc(this.id)" value = "<%= card[0].cardnum %>" class = "del_card1" type="button" value = "X" style="background-color: white; color: red;">
                                 </div>
-                                <div id = "card2">
+                                <div id = "card2div" name = "card2" value = "<%= card[1].cardnum %>">
                                     <img src="../images/etc/creditcard.png" alt="..." width="350px;">
                                     <h4 class="con_card2">
                                         <%= card[1].cardnum.substr(0,4)%>-<%= card[1].cardnum.substr(4,4)%>-<%= card[1].cardnum.substr(8,4)%>-<%= card[1].cardnum.substr(12)%>
@@ -153,10 +154,9 @@
                                             MASTER
                                         <% } %>
                                     </h4>
-                                    <input id = "card2" onclick = "delcardFunc(this.id)" value = "<%= card[1].cardnum %>" class = "del_card2" type="button" value = "X" style="background-color: white; color: red;">
                                 </div>
                             <% } else if (card.length === 1){ %>
-                                <div id="card3">
+                                <div id="card3div" name = "card3" value = "<%= card[0].cardnum %>">
                                     <img src="../images/etc/creditcard.png" alt="..." width="350px;">
                                     <h4 class="con_card3">
                                         <%= card[0].cardnum.substr(0,4)%>-<%= card[0].cardnum.substr(4,4)%>-<%= card[0].cardnum.substr(8,4)%>-<%= card[0].cardnum.substr(12)%>
@@ -171,13 +171,18 @@
                                             MASTER
                                         <% } %>
                                     </h4>
-                                    <input id = "card3" onclick = "delcardFunc(this.id)" value = "<%= card[0].cardnum %>" class = "del_card3" type="button" value = "X" style="background-color: white; color: red;">
                                 </div>
-                                <input style="color: green; background-color: white; font-size: 3rem; width: 100px; height: 100px; margin: 0 180px 0 0;" type="button" onclick="cardFunc()" value = "+">
                             <% } else { %>
-                                <input style="color: green; background-color: white; font-size: 3rem; width: 100px; height: 100px; margin: 0 180px 0 0;" type="button" onclick="cardFunc()" value = "+">
-                                <input style="color: green; background-color: white; font-size: 3rem; width: 100px; height: 100px; margin: 0 0 0 180px;" type="button" onclick="cardFunc()" value = "+">
+                                카드 없음
                             <% } %>
+                        </div>
+                        <div style="width: 200px;">
+                            <select name = "selectCard" id = "selectCard" class="form-select" aria-label="Default select example" onchange="selectOnChangeCard(this)">
+                                <option selected> ---카드 삭제--- </option>
+                                <% for(var i = 0; i < card.length; i++){ %>
+                                    <option value = "<%= card[i].cardnum %>"><%= card[i].cardnum.substr(0,4)%>-<%= card[i].cardnum.substr(4,4)%>-<%= card[i].cardnum.substr(8,4)%>-<%= card[i].cardnum.substr(12)%></option>
+                                <% }; %>
+                            </select>
                         </div>
                         <div id = "cardInputDiv" style="margin-top: 10px; display: none;">
                             <div class="wrapper">
@@ -213,13 +218,7 @@
     </main>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-        function delcardFunc(id){
-            let current_element = document.getElementById(id);
-            let parent_element = current_element.parentNode;
-            parent_element.type = "hidden";
-            console.log(parent_element);
-            
-        }
+        
         function cardFunc(){
             document.getElementById("cardInputDiv").style.display = "";
             document.getElementById("hiddenStatusCard").value = "card";
@@ -227,6 +226,15 @@
 
         function deleteFunc(target){
             document.getElementById("hiddenStatus").value = "delete";
+        }
+
+        function selectOnChangeCard(target){
+            if(target.selectedIndex !== 0){
+                document.getElementById("cardDiv").value = target.options[target.selectedIndex].value;
+                document.getElementById("hiddenDelCard").value = "delok";
+            } else {
+                document.getElementById("hiddenDelCard").value = "";
+            }
         }
 
         function selectOnChange(target){

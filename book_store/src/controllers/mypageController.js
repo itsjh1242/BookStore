@@ -18,8 +18,8 @@ function editAddress(addr, postnum, indexNum){
     connection.query(qMypage.editAddress, [addr, postnum, indexNum]);
 }
 
-function editpw(pw, postnum){
-    connection.query(qMypage.editpw, [pw, postnum]);
+function editpw(pw, id){
+    connection.query(qMypage.editpw, [pw, id]);
 }
 
 function addAddress(id, addr, postnum){
@@ -36,8 +36,14 @@ function getCard(id, callback){
     })
 }
 
-function addCard(id, cardnum, cardexp, cardtype){
-    connection.query(qMypage.addCard, [id, cardnum, cardexp, cardtype]);
+// function addCard(id, cardnum, cardexp, cardtype, callback){
+//     connection.query(qMypage.addCard, [id, cardnum, cardexp, cardtype], (err) => {
+//         callback(err);
+//     });
+// }
+
+function deleteCard(id, cardnum){
+    connection.query(qMypage.deleteCard, [id, cardnum]);
 }
 
 
@@ -49,5 +55,5 @@ module.exports = {
     addAddress,
     deleteAddress,
     getCard,
-    addCard
+    deleteCard
 }

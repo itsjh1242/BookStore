@@ -6,7 +6,7 @@ const { upload } = require('./multer');
 
 const cSignUp = require('../controllers/mypageController');
 
-
+ 
 // myPage
 router.get('/', function(req, res){
     try{
