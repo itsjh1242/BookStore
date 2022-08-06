@@ -15,11 +15,6 @@ router.get('/', function(req, res){
                 signinStatus: true,
                 userName: req.session.userName
             });
-        } else{
-            res.render('/', {
-                signinStatus: false,
-                userName: false
-            });
         }
     } catch (err1) {
         throw (err1);

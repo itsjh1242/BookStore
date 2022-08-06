@@ -5,6 +5,7 @@ var session = require('express-session');
 var MySQLStore = require('express-mysql-session');
 
 const cMain = require('../controllers/mainController');
+const e = require('express');
 
 var options={
     host:'localhost',
@@ -53,10 +54,65 @@ router.get('/', function(req, res){
             } 
         });
     });
+
+router.post('/', function(req, res){
+    let book = req.body.bookinfo;
+    cMain.getBookInfo(book, (rows) => {
+        res.render('main/bookinfo', {
+            signinStatus: true,
+            userName: req.session.userName,
+            userid: req.session.uid,
+            rows: rows
+        })
+    })
+})
+
+router.post('/buynow', function(req, res){
+    try{
+        let book_index = Number(req.body.bookindex1);
+        let book_price = req.body.bookprice1;
+        let id = req.session.uid;
+        cMain.getCash(id, (credit) => {
+            if (credit.length !== 0){
+                let currentCash = credit[0].cash;
+                if (currentCash < book_price){
+                    return res.send("<script>alert('잔액이 부족합니다.');history.back();</script>")
+                } else {
+                    let updateCash = currentCash - book_price;
+                    let rate = Number(req.body.salesrate) + 1
+                    cMain.addOrder(id, book_index);
+                    cMain.updatePayment(updateCash, id);
+                    cMain.rateIncrease(rate, book_index);
+                    return res.send("<script>alert('주문이 완료되었습니다.');history.back();</script>")
+                }
+            } else {
+                return res.send("<script>alert('사용가능한 카드가 없습니다.');history.back();</script>")
+            }
+            
+        })
+    } catch (err1) {
+        throw err1;
+    }
+
+})
+
+router.post('/gobasket', function(req, res){
+    try{
+        let book_index = req.body.bookindex2;
+        let book_price = req.body.bookprice2;
+        let id = req.session.uid;
+    } catch (err1) {
+        throw err1;
+    }
+})
+
+    
 router.get('/', function(req, res){
     res.render('html', {
         name: req.session.uid
     })
 })
+
+
 
 module.exports = router;

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+    <html>
+    <%- include('../../partials/head'); %>
+    <style>
+    .wrapper{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 50px; min-width: 100px;
+      }
+      .content{
+          margin: 2rem;
+          border-radius: 30px;
+          width: auto; height: auto;
+      }
+      .con_img{
+            position: relative;
+        }
+      .cardText{
+            position: absolute;
+            color: black;
+            top: 20px; left: 33px;
+        }
+    </style>
+    <body>
+        <header>
+          <%- include('../../partials/header', {
+            signinStatus: signinStatus,
+            userName: userName
+          }); %>
+        </header>
+    <main>
+      <div class = "wrapper">
+        <% for(var i = 0; i < card.length; i++){ %>
+          <div class = "content con_img">
+            <img src="../images/etc/creditcard.png" alt="..." width="350px;">
+            <h4 class="cardText">
+              <%= card[i].cardtype %><br><br>
+              <br>
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= card[i].cardexp.substr(0,2) %>&nbsp/&nbsp<%= card[i].cardexp.substr(2) %>
+              <br>
+              <%= card[i].cardnum.substr(0,4)%>-<%= card[i].cardnum.substr(4,4)%>-<%= card[i].cardnum.substr(8,4)%>-<%= card[i].cardnum.substr(12)%>
+              <br><br><br>&nbsp&nbsp&nbsp&nbsp&nbsp
+              <p style="display: inline; color: green"><%= card[i].cash %></p>원
+            </h4>
+          </div>
+        <% } %>
+        <% for(var i = 2; i > card.length; i--){ %>
+          <Button onclick = "clickPlus()" style="width: 100px; height: 100px; margin: 2rem 3rem 2rem 3rem;"> + </Button>
+        <% } %>
+      </div>
+      <div id = "cardInputDiv" style="margin-top: 10px; display: none;">
+        <form method="post">
+          <div class="wrapper">
+              <label for="destination_text" class="form-label" style="margin-right: 10px;">카드 번호</label>
+              <input name = "cardNum1" style="margin :0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum1">
+              -
+              <input name = "cardNum2" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum2">
+              -
+              <input name = "cardNum3" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum3">
+              -
+              <input name = "cardNum4" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum4">
+          </div>
+          <div class="wrapper">
+              <label for="destination_text" class="form-label" style="margin-right: 10px;">유효기간</label>
+              <input name = "cardExpM" style = "width: 80px;" type="number" class = "form-control" id = "cardExpM" placeholder="MM" min=1 max=12>
+              <strong>&nbsp&nbsp/&nbsp&nbsp</strong>
+              <input name = "cardExpY" style = "width: 80px;" type="number" class = "form-control" id = "cardExpY" placeholder="YY" min=1 max=31>
+          </div>
+          <div class="wrapper">
+              <label for="destination_text" class="form-label" style="margin-right: 10px;">카드 유형</label>
+              <input name = "cardType" type="radio" value="VISA"> <strong>&nbspVISA</strong>&nbsp&nbsp&nbsp&nbsp
+              <input name = "cardType" type="radio" value="MASTER"> <strong>&nbspMASTER</strong>
+          </div>
+          <div class="wrapper">
+            <input type = "submit" name = "addCard" id = "addCard" value = "등록">
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      function clickPlus(){
+        document.getElementById("cardInputDiv").style.display = "";
+      }
+    </script>
+
+    <footer>
+    <%- include('../../partials/footer'); %>
+    </footer>
+
+    </body>
+</html>

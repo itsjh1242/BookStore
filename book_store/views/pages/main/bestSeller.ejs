@@ -18,10 +18,13 @@
             <div class="card inline-block-center" style="width: 18rem;">
                 <img src="../images/book/book<%= rows[i].book_num %>.jpeg" class="card-img-top" alt="..." height = "400" width = "150">
                 <div class="card-body">
-                <h5 class="card-title"><%= rows[i].book_title %></h5>
-                <h6 class = "card-text"> 가격: <%= rows[i].book_price %> </h6>
-                <p class="card-text">판매량: <%= rows[i].book_salesRate %></p>
-                <a href="#" class="btn btn-primary">보러가기</a> 
+                    <h5 class="card-title"><%= rows[i].book_title %></h5>
+                    <h6 class = "card-text"> 가격: <%= rows[i].book_price %> </h6>
+                    <p class="card-text">판매량: <%= rows[i].book_salesRate %></p>
+                    <form method="post">
+                        <input type="hidden" name="bookinfo" id="bookinfo" value="<%= rows[i].book_index %>">
+                        <input type="submit" value = "상세보기" class="btn btn-primary">
+                    </form>
                 </div>
             </div>
         <% }; %>

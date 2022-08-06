@@ -33,18 +33,17 @@ function deleteAddress(indexNum){
 function getCard(id, callback){
     connection.query(qMypage.getCard, [id], (err, card) => {
         callback(card);
-    })
+    });
 }
 
-// function addCard(id, cardnum, cardexp, cardtype, callback){
-//     connection.query(qMypage.addCard, [id, cardnum, cardexp, cardtype], (err) => {
-//         callback(err);
-//     });
-// }
+function addCard(id, cardnum, cardexp, cardtype){
+    connection.query(qMypage.addCard, [id, cardnum, cardexp, cardtype]);
+}
 
 function deleteCard(id, cardnum){
     connection.query(qMypage.deleteCard, [id, cardnum]);
 }
+
 
 
 module.exports = {
@@ -55,5 +54,6 @@ module.exports = {
     addAddress,
     deleteAddress,
     getCard,
-    deleteCard
+    deleteCard,
+    addCard
 }

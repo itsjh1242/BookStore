@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <html>
+    <%- include('../../partials/head'); %>
+    <style>
+      .wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50px; min-width: 100px;
+        }
+        .content{
+            margin: 2rem;
+            border-radius: 30px;
+            background-color: #FAFAFA;
+            width: 960px; height: auto;
+        }
+    </style>
+    <body>
+        <header>
+          <%- include('../../partials/header', {
+            signinStatus: signinStatus,
+            userName: userName
+          }); %>
+        </header>
+    <main>
+      <div class="wrapper">
+        <ol class="list-group list-group-numbered content">
+          <% for(var i = 0; i < bi.length; i++){ %>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold"><%= bi[i].book_title %></div>
+                <div style="width: 50px; height: 50px;">
+                  <img src="../images/book/book<%= bi[i].book_num %>.jpeg" class="card-img-top" alt="..." height = "auto" width = "auto">
+                </div>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp가격: <%= bi[i].book_price %> | 구매일자: <%= bi[i].date %>
+              </div>
+              <span class="badge bg-primary rounded-pill"><%= bi[i].book_genre %></span>
+            </li>
+          <% } %>
+        </ol>
+      </div>
+    </main>
+
+    <footer>
+    <%- include('../../partials/footer'); %>
+    </footer>
+
+    </body>
+</html>

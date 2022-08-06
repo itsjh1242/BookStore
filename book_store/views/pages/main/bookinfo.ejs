@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+    <html>
+    <%- include('../../partials/head'); %>
+    <style>
+      .wrapper{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 50px;
+      }
+      .info{
+        display: inline-block;
+        justify-content: center;
+        align-items: center;
+      }
+      .book{
+          display: inline;
+          margin: 50px 0 50px;
+          width: auto; height: auto;
+          border-radius: 30px;
+          border-style: none;
+          background-color: rgb(243, 243, 240);
+          font: 1.5em/1em 굴림, serif;
+      }
+  </style>
+    <body>
+        <header>
+          <%- include('../../partials/header', {
+            signinStatus: signinStatus,
+            userName: userName
+          }); %>
+        </header>
+    <main>
+      <div class="wrapper">
+        <div class="book">
+          <img src="../images/book/book<%= rows[0].book_num %>.jpeg" class="card-img-top" alt="..." height = "400" width = "150">
+        </div>
+      </div>
+      <div class="wrapper">
+        <div class="info">
+          <label for="destination_text" class="">제목: <%= rows[0].book_title %></label><br><br>
+          <label  for="destination_text" class="">가격: <%= rows[0].book_price %></label><br>
+          <label for="destination_text" class="">장르: <%= rows[0].book_genre %></label><br>
+          <label for="destination_text" class="">설명: <%= rows[0].book_info %></label><br>
+        </div>
+      </div>
+      <div class="wrapper">
+        <form method="post" class="info" action="/buynow">
+          <input type="hidden" name="bookindex1" value="<%= rows[0].book_index %>">
+          <input type="hidden" name="bookprice1" value="<%= rows[0].book_price %>">
+          <input type="hidden" name="salesrate" value="<%= rows[0].book_salesRate %>">
+          <input class="btn btn-primary" type="submit" value="바로구매">
+        </form>
+        &nbsp
+        <form method="post" class="info" action="/gobasket">
+          <input type="hidden" name="bookindex2" value="<%= rows[0].book_index %>">
+          <input type="hidden" name="bookprice2" value="<%= rows[0].book_price %>">
+          <input class="btn btn-primary" type="submit" value="장바구니">
+        </form>
+      </div>
+    </main>
+
+    <footer>
+    <%- include('../../partials/footer'); %>
+    </footer>
+
+    </body>
+</html>

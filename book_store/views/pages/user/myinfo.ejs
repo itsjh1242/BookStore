@@ -107,7 +107,7 @@
                                 <option value = "<%= i + 1 %>"><%= address[i].indexNum %>. <%= address[i].postNum %> <%= address[i].address1 %></option>
                             <% }; %>
                         </select>
-                        <input name = "hiddenStatus" id = "hiddenStatus" type = "hidden" value = "">
+                        
                         <input name = "hiddenStatusCard" id = "hiddenStatusCard" type = "hidden" value = "">
                         <input name = "hiddenIndex" id = "hiddenIndex" type = "hidden" value = "">
                         <input name = "hiddenDelCard" id = "hiddenDelCard" type = "hidden" value = "">
@@ -184,29 +184,6 @@
                                 <% }; %>
                             </select>
                         </div>
-                        <div id = "cardInputDiv" style="margin-top: 10px; display: none;">
-                            <div class="wrapper">
-                                <label for="destination_text" class="form-label" style="margin-right: 10px;">카드 번호</label>
-                                <input name = "cardNum1" style="margin :0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum1">
-                                -
-                                <input name = "cardNum2" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum2">
-                                -
-                                <input name = "cardNum3" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum3">
-                                -
-                                <input name = "cardNum4" style="margin: 0 5px 0 5px; width: 150px;" type="text" class="form-control" id="cardnum4">
-                            </div>
-                            <div class="wrapper">
-                                <label for="destination_text" class="form-label" style="margin-right: 10px;">유효기간</label>
-                                <input name = "cardExpM" style = "width: 80px;" type="number" class = "form-control" id = "cardExpM" placeholder="MM" min=1 max=12>
-                                <strong>&nbsp&nbsp/&nbsp&nbsp</strong>
-                                <input name = "cardExpY" style = "width: 80px;" type="number" class = "form-control" id = "cardExpY" placeholder="YY" min=1 max=31>
-                            </div>
-                            <div class="wrapper">
-                                <label for="destination_text" class="form-label" style="margin-right: 10px;">카드 유형</label>
-                                <input name = "cardType" type="radio" value="typevisa"> <strong>&nbspVISA</strong>&nbsp&nbsp&nbsp&nbsp
-                                <input name = "cardType" type="radio" value="typemaster"> <strong>&nbspMASTER</strong>
-                            </div>
-                        </div>
                     </div>
                     <div style="display: flex; justify-content: center; align-items: center;">
                         <button type="submit" class="btn btn-primary">저장</button>
@@ -219,10 +196,6 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
         
-        function cardFunc(){
-            document.getElementById("cardInputDiv").style.display = "";
-            document.getElementById("hiddenStatusCard").value = "card";
-        }
 
         function deleteFunc(target){
             document.getElementById("hiddenStatus").value = "delete";

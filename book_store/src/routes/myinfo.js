@@ -39,7 +39,6 @@ router.post('/', function(req, res){
     let select = req.body.select;
     let indexNum = req.body.hiddenIndex;
     let StatusDel = req.body.hiddenStatus;
-    let StatusCard = req.body.hiddenStatusCard;
     let StatusDelCard = req.body.hiddenDelCard;
     let delcard = req.body.cardDiv;
     
@@ -95,9 +94,9 @@ router.post('/', function(req, res){
             cMyPage.getAddress(id, (address) => {
                 if (address.length < 2){
                     cMyPage.addAddress(id, addr, postnum);
-                    return res.redirect('/info');
                 };
             });
+            return res.redirect('/info');
         }
     
         if (input !== ""){
