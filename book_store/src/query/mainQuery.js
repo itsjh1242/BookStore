@@ -16,3 +16,15 @@ exports.updateCash = 'UPDATE credit SET cash = ? WHERE user_id = ?';
 
 // increase sales rate
 exports.rateIncrease = 'UPDATE book SET book_salesRate = ? WHERE book_index = ?';
+
+/* Basket Part */
+// add Basket
+exports.addBasket = 'INSERT INTO basket VALUES (NULL, ?, ?, ?)';
+
+//add Basket dup
+exports.addBasketDup = 'UPDATE basket SET book_value = ? WHERE user_id = ? AND book_index = ?';
+
+// get Basket
+exports.getBasket = 'SELECT * FROM basket WHERE user_id = ? AND book_index = ?';
+
+exports.test = 'SELECT * FROM book ORDER BY book_salesRate DESC';

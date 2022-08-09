@@ -12,6 +12,7 @@ var mypageRouter = require('./src/routes/mypage');
 var myinfoRouter = require('./src/routes/myinfo');
 var mycardRouter = require('./src/routes/card');
 var orderListRouter = require('./src/routes/orderlist');
+var basketRouter = require('./src/routes/basket');
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use('/mypage', mypageRouter);
 app.use('/info', myinfoRouter);
 app.use('/card', mycardRouter);
 app.use('/orderlist', orderListRouter);
+app.use('/basket', basketRouter);
 
 
 // catch 404 and forward to error handler

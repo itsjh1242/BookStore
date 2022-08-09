@@ -18,12 +18,11 @@ function getBookInfo(n, callback){
 function getCash(id, callback){
     connection.query(qMain.getCash, [id], (err, credit) => {
         callback(credit);
-    })
+    });
 }
 
 function addOrder(id, index){
     connection.query(qMain.addOrder, [id, index]);
-    
 }
 
 function updatePayment(cash, id){
@@ -39,6 +38,20 @@ function rateIncrease(rate, index){
     connection.query(qMain.rateIncrease, [rate, index]);
 }
 
+function addBasket(id, index){
+    connection.query(qMain.addBasket, [id, index, 1]);
+}
+
+function addBasketDup(value, id, index){
+    connection.query(qMain.addBasketDup, [value, id, index]);
+}
+
+function getBasket(id, index, callback){
+    connection.query(qMain.getBasket, [id, index], (err, basket) => {
+        callback(basket)
+    });
+}
+
 
 module.exports = {
     getBestSeller,
@@ -46,5 +59,8 @@ module.exports = {
     getCash,
     addOrder,
     updatePayment,
-    rateIncrease
+    rateIncrease,
+    addBasket,
+    addBasketDup,
+    getBasket
 }

@@ -98,13 +98,24 @@ router.post('/buynow', function(req, res){
 
 router.post('/gobasket', function(req, res){
     try{
-        let book_index = req.body.bookindex2;
-        let book_price = req.body.bookprice2;
+        let book_index = Number(req.body.bookindex2);
         let id = req.session.uid;
+        // cMain.getBasket(id, book_index, (basket) => {
+        //     console.log(basket);
+        // })
+        cMain.getBasket(id, book_index, (basket) => {
+            if(basket.length > 0){
+                cMain.addBasketDup(basket[0].book_value + 1, id, book_index);
+                return res.send("<script>alert('동일한 상품이 장바구니에 추가되었습니다.');history.back();</script>");
+            } else {
+                cMain.addBasket(id, book_index);
+                return res.send("<script>alert('새로운 상품이 장바구니에 추가되었습니다.');history.back();</script>");
+            }
+        });
     } catch (err1) {
         throw err1;
     }
-})
+});
 
     
 router.get('/', function(req, res){
