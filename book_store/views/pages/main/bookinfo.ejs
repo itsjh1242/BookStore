@@ -37,11 +37,16 @@
         </div>
       </div>
       <div class="wrapper">
-        <div class="info">
-          <label for="destination_text" class="">제목: <%= rows[0].book_title %></label><br><br>
-          <label  for="destination_text" class="">가격: <%= rows[0].book_price %></label><br>
-          <label for="destination_text" class="">장르: <%= rows[0].book_genre %></label><br>
-          <label for="destination_text" class="">설명: <%= rows[0].book_info %></label><br>
+        <div class="card" style="width: 960px;">
+          <h5 class="card-header">제목: <%= rows[0].book_title %> <span class="badge bg-secondary"><strong><%= rows[0].book_genre %></strong></span></h5>
+          <div class="card-body">
+            <h5 class="card-title">가격: 
+              <% if(rows[0].book_price.toString().length === 5) {%>
+                  <%= rows[0].book_price.toString().substring(0,2) %>,<%= rows[0].book_price.toString().substring(2) %>
+              <% }%>
+              원</h5>
+            <p class="card-text"><strong>설명:</strong> <%= rows[0].book_info %></p>
+          </div>
         </div>
       </div>
       <div class="wrapper">

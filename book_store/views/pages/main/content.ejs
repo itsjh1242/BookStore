@@ -11,23 +11,23 @@
     <br>
     <div class = "container-sm text-center">
         <h1 class = "Allbooks"> All books </h1>
+        <hr class="border border-secondary border-3 opacity-75">
     </div>
     <br>
-    <div class="container text-center">
+    <div class="container text-center" style="max-width: 1920px;">
         <% for(var i = 0; i < rows.length; i++){ %>
-            <% if ( i % 3 == 0 ) { %>
+            <% if ( i % 5 == 0 ) { %>
                 <br>
             <% } %>
-            <div class="card inline-block-center" style="width: 18rem;">
+            <div class="card inline-block-center" style="width: 16rem; height: auto;">
                 <img src="../images/book/book<%= rows[i].book_num %>.jpeg" class="card-img-top" alt="..." height = "400" width = "150">
                 <div class="card-body">
-                <h5 class="card-title"><%= rows[i].book_title %></h5>
+                <h5 class="card-title"><%= rows[i].book_title %> <span class="badge bg-secondary"><strong><%= rows[i].book_genre %></strong></span></h5>
                 <p class="card-text">
-                    장르: <%= rows[i].book_genre %>
-                    <br>
-                    가격: <%= rows[i].book_price %>
-                    <br>
-                    한 줄 소개: <%= rows[i].book_info %>
+                    가격: 
+                    <% if(rows[i].book_price.toString().length === 5) {%>
+                        <%= rows[i].book_price.toString().substring(0,2) %>,<%= rows[i].book_price.toString().substring(2) %>
+                    <% }%>원
                 </p>
                 <form method="post">
                     <input type="hidden" name="bookinfo" id="bookinfo" value="<%= rows[i].book_index %>">
@@ -38,9 +38,3 @@
         <% }; %>
     </div>
 </div>
-
-<!-- <% for(var j = 0; j < 3; j++){ %>
-    <div class = "col">
-        test
-    </div>
-<% }; %> -->

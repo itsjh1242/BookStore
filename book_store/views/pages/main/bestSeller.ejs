@@ -6,11 +6,23 @@
         margin-right: 40px;
         margin-bottom: 30px;
     }
+    .wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 2rem;
+    }
 </style>
+<div class="wrapper">
+    <div class="alert alert-primary" role="alert" style="width: 960px; min-width: 960px;">
+        Dongseo Univ, 20181495, Kim Jun Hyeon <br>| Node Js를 이용한 도서구매 사이트 Beta |<br>✨<a href="https://github.com/itsjh1242/Node.js/tree/main/book_store">Github BookStore Beta</a>
+    </div>
+</div>
 <div class="container-fluid">
     <br>
     <div class = "container-sm text-center">
-        <h1 class = "bestSeller"> Best Seller </h1>
+        <h1 class = "bestSeller"> 🎊Best Seller🎊 </h1>
     </div>
     <br>
     <div class="container text-center">
@@ -18,8 +30,13 @@
             <div class="card inline-block-center" style="width: 18rem;">
                 <img src="../images/book/book<%= rows[i].book_num %>.jpeg" class="card-img-top" alt="..." height = "400" width = "150">
                 <div class="card-body">
-                    <h5 class="card-title"><%= rows[i].book_title %></h5>
-                    <h6 class = "card-text"> 가격: <%= rows[i].book_price %> </h6>
+                    <h5 class="card-title"><%= rows[i].book_title %><span class="badge bg-secondary"><%= i + 1 %>위</span></h5>
+                    <h6 class = "card-text"> 가격: 
+                        <% if(rows[i].book_price.toString().length === 5) {%>
+                            <%= rows[i].book_price.toString().substring(0,2) %>,<%= rows[i].book_price.toString().substring(2) %>
+                        <% }%>
+                        원
+                    </h6>
                     <p class="card-text">판매량: <%= rows[i].book_salesRate %></p>
                     <form method="post">
                         <input type="hidden" name="bookinfo" id="bookinfo" value="<%= rows[i].book_index %>">
@@ -31,28 +48,3 @@
     </div>
     <br>
 </div>
-
-<!-- <div class = "container-sm text-center">
-    <h1 class = "bestSeller"> Best Seller </h1>
-</div>
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="width: 50;">
-    <div class="carousel-inner">
-    <div class="carousel-item active">
-        <img src="../images/book/book<%= rows[0].book_num %>.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-        <img src="../images/book/book<%= rows[1].book_num %>.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-        <img src="../images/book/book<%= rows[2].book_num %>.jpg" class="d-block w-100" alt="...">
-    </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-    </button>
-</div> -->

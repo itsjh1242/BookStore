@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+    <html>
+    <%- include('../../partials/head'); %>
+    <style>
+      .mainD{
+        display: grid; justify-content: center; align-items: center;
+        margin-top: 2rem; margin-bottom: 2rem;
+        min-width: 960px;
+      }
+    </style>
+    <body>
+        <header>
+          <%- include('../../partials/header', {
+            signinStatus: signinStatus,
+            userName: userName
+          }); %>
+        </header>
+    <main>
+      <form method="post">
+        <div class="mainD">
+          <div class="alert alert-warning" role="alert" style="width: auto;">
+            💡도서 수량은 이전 페이지에서 수정할 수 있습니다.
+          </div>
+          <div class="card" style="width: 960px; display: block;">
+            <h5 class="card-header">결제하기</h5>
+            <div class="card-body">
+              <h5 class="card-title">내 장바구니 목록</h5>
+              <table class="table table-striped">
+                <tr>
+                  <td>
+                    도서 번호
+                  </td>
+                  <td>
+                    도서 제목
+                  </td>
+                  <td>
+                    단가
+                  </td>
+                  <td>
+                    수량
+                  </td>
+                  <td>
+                    총 가격
+                  </td>
+                </tr>
+                <% for(var i = 0; i < chkb.length; i++){ %>
+                <tr>
+                  <td>
+                    <%= chkb[i].book_num %>
+                  </td>
+                  <td>
+                    <%= chkb[i].book_title %>
+                  </td>
+                  <td>
+                    <%= chkb[i].book_price %>
+                  </td>
+                  <td>
+                    <%= chkb[i].book_value %>
+                  </td>
+                  <td>
+                    <%= chkb[i].book_value * chkb[i].book_price %>
+                  </td>
+                </tr>
+                <% } %>
+                <tr>
+                  <td>
+                    총 수량: 
+                    <% let n = 0; %>
+                    <% for(var i = 0; i < chkb.length; i++){ %>
+                      <% n += chkb[i].book_value %>
+                    <% } %>
+                    <%= n %>권
+                  </td>
+                  <td>
+                    총 결제 금액: 
+                    <% n = 0; %>
+                    <% for(var i = 0; i < chkb.length; i++){ %>
+                      <% n += (chkb[i].book_value * chkb[i].book_price) %>
+                    <% } %>
+                    <%= n %>원
+                  </td>
+                </tr>
+              </table>
+              <button name="goorder" type="submit" class="btn btn-primary">결제</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    </main>
+
+    <footer>
+    <%- include('../../partials/footer'); %>
+    </footer>
+
+    </body>
+</html>

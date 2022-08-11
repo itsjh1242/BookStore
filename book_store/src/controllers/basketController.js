@@ -7,6 +7,17 @@ function getBasket(id, callback){
   })
 }
 
+function updateBasket(b_value, b_number, id){
+  connection.query(qBasket.updateBasket, [b_value, true, b_number, id]);
+}
+
+function initStatus(){
+  connection.query(qBasket.initStatus, [false]);
+}
+
+
 module.exports ={
-  getBasket
+  getBasket,
+  updateBasket,
+  initStatus
 }

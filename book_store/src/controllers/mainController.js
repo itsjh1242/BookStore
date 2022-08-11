@@ -22,7 +22,7 @@ function getCash(id, callback){
 }
 
 function addOrder(id, index){
-    connection.query(qMain.addOrder, [id, index]);
+    connection.query(qMain.addOrder, [id, index, 1]);
 }
 
 function updatePayment(cash, id){

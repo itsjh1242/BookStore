@@ -16,14 +16,14 @@
         }
     </style>
     <body>
-        <header>
-          <%- include('../../partials/header', {
-            signinStatus: signinStatus,
-            userName: userName
-          }); %>
-        </header>
+      <header>
+        <%- include('../../partials/header', {
+          signinStatus: signinStatus,
+          userName: userName
+        }); %>
+      </header>
     <main>
-      <div class="wrapper">
+      <div id="main1" class="wrapper">
         <ol class="list-group list-group-numbered content">
           <form method="POST">
             <% for(var i = 0; i < br.length; i++){ %>
@@ -33,12 +33,25 @@
                 </div>
                 <div class="ms-2 me-auto">
                   <div class="fw-bold">
-                    <input name = "mychk" id = "mychk" onclick="chkCliked(this)" class="form-check-input mt-0" type="checkbox" value="<%= br[i].book_price * br[i].book_value %>, <%=br[i].book_index%>" aria-label="Checkbox for following text input">
+                    <input name = "mychk" id = "<%= i %>" onclick="chk_fc(this)" class="form-check-input mt-0" type="checkbox" value="<%= br[i].basketNum %>" aria-label="Checkbox for following text input">
+                    <input type='hidden' name = "hiddenchk" id="hiddenchk<%= i %>" value="<%= br[i].book_price * br[i].book_value %>">
                     <%= br[i].book_title %>
                   </div>
-                  단가: <%= br[i].book_price %><br>
-                  수량: <%= br[i].book_value %><br>
-                  총 가격: <%= br[i].book_price * br[i].book_value %>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">단가</span>
+                    <input id="productPrice<%= i %>" type="text" class="form-control" value="<%= br[i].book_price %>" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">수량</span>
+                    <input id="<%= i %>" type="text" class="form-control" value="<%= br[i].book_value %>" aria-label="Username" aria-describedby="basic-addon1" onchange="cg_inputValue(this)">
+                    <input id="ha<%= i %>" name="hiddenAmount" type="hidden" value="<%= br[i].book_value %>">
+                    <input name="hiddenBasketNum" type="hidden" value="<%= br[i].basketNum %>">
+                    <input name="hiddenBookIndex" type="hidden" value="<%= br[i].book_index %>">
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">총 가격</span>
+                    <input id="tp<%= i %>" type="text" class="form-control" value="<%= br[i].book_price * br[i].book_value %>" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                  </div>
                   <br>
                 </div>
                 <% if(br[i].book_value > 1) { %>
@@ -52,32 +65,33 @@
               <h5 class="card-title">결제 정보</h5>
               <h6 class="card-subtitle mb-2 text-muted"></h6>
               <p id="totalprice" class="card-text">합계: <span id="totalpricespan">0</span>원</p>
-              <input name="gocredit" type="submit" class="btn btn-primary" value="결제" onclick="chkClieckMaster()">
+              <button name="gocredit" type="submit" class="btn btn-primary" onclick="javascript: form.action='basket/update';">결제</button>
               <input name="selected" type="hidden" value = "">
             </div>
           </div>
-        </div>
       </form>
+    </div>
+    </main>
     <footer>
     <%- include('../../partials/footer'); %>
     </footer>
-
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
-      function chkCliked(chk){
-        let array = chk.value.split(',');
-        if(chk.checked == true){
-          totalpricespan.textContent = Number(totalpricespan.textContent) + Number(array[0]);
+      function cg_inputValue(amount){
+        document.getElementById("ha"+amount.id).value = amount.value;
+        document.getElementById("tp"+amount.id).value = String(Number(document.getElementById("productPrice"+amount.id).value) * Number(document.getElementById("ha"+amount.id).value));
+        $(":checkbox").prop("checked",false);
+        totalpricespan.textContent = 0;
+      }
+
+      function chk_fc(chk){
+        let num = document.getElementById("tp"+chk.id).value;
+        if(document.getElementById(chk.id).checked == true){
+          totalpricespan.textContent = Number(totalpricespan.textContent) + Number(num);
         } else {
-          totalpricespan.textContent = Number(totalpricespan.textContent) - Number(array[0]);
+          totalpricespan.textContent = Number(totalpricespan.textContent) - Number(num);
         }
       }
-
-      function chkClieckMaster(){
-        const query = 'input[name="mychk"]:checked';
-        const selectedEls = document.querySelectorAll(query);
-        document.getElementsByName("selected").value = selectedEls;
-      }
     </script>
-
     </body>
 </html>

@@ -13,6 +13,7 @@ var myinfoRouter = require('./src/routes/myinfo');
 var mycardRouter = require('./src/routes/card');
 var orderListRouter = require('./src/routes/orderlist');
 var basketRouter = require('./src/routes/basket');
+var payRouter = require('./src/routes/pay');
 
 var app = express();
 
@@ -36,7 +37,7 @@ app.use('/info', myinfoRouter);
 app.use('/card', mycardRouter);
 app.use('/orderlist', orderListRouter);
 app.use('/basket', basketRouter);
-
+app.use('/pay', payRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
