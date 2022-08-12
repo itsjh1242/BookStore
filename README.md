@@ -3,7 +3,7 @@
 </p>
 <br>
 <p align = "center" style = "color: green";>
-  Study with <a href = "https://github.com/qqaazz0222"> Mamensu </a>
+  Study with<br>🧑‍<a href = "https://github.com/qqaazz0222"> Mamensu </a>
 </p>
 <br>
 <br>
