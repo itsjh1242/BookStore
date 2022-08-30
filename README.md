@@ -18,6 +18,9 @@
     <img src="https://github.com/itsjh1242/BookStore/blob/main/src/bookstorebetamain.png" width="300" height="200"/>
   </p>
   <h5> | BestSeller | MyPage | Cart | Order | Order List | CreditCard | </h5>
+  <hr>
+  <li> <a href="https://github.com/itsjh1242/BookStore/tree/main/BookStoreV1.0"> Book Store V1.0</a> </li>
+  <h4> Node.js 도서구매 사이트 V1.0 </h4>
 </ul>
 <br>
 <h2>
