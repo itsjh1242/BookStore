@@ -7,7 +7,7 @@ DB에 연결된 Connection을 미리 만들어 둔 후 Pool에 보관했다가
 const connection = mysql.createConnection({
     host:'localhost',
     user: 'root',
-    password: '0112',
+    password: 'itsjh0112',
     port: 3306,
     database: 'node_db',
     multipleStatements : true
