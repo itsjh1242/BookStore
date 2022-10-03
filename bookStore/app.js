@@ -9,7 +9,7 @@ var logger = require('morgan');
 
 server.listen(3000);
 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./src/routes/index');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

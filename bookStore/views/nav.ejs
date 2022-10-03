@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <!-- Nav-left -->
+        <a class="navbar-brand" href="#">도서구매사이트</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav"> 
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">홈</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li class="navbar-nav">
+        </ul>
+        <!-- 가운데 여백 -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Nav-right -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <form class="d-flex">
+                <% if(signinStatus) {%>
+                    <a class="btn btn-outline-secondary btn-sm" href="/cart">
+                        <span class="material-symbols-outlined" style="vertical-align: middle; line-height: normal; font-size: medium;">shopping_cart</span>
+                        장바구니</a>&nbsp;
+                    <a class="btn btn-outline-secondary btn-sm" href="/mypage">
+                        <span class="material-symbols-outlined" style="vertical-align: middle; line-height: normal; font-size: medium;">account_circle</span>
+                        마이페이지</a>&nbsp;
+                    <a class="btn btn-outline-secondary btn-sm" href="/signin">
+                        <span class="material-symbols-outlined" style="vertical-align: middle; line-height: normal; font-size: medium;">logout</span>
+                        로그아웃</a>
+                <% } else {%>
+                    <a class="btn btn-outline-secondary btn-sm" href="/signin">
+                        <span class="material-symbols-outlined" style="vertical-align: middle; line-height: normal; font-size: medium;">login</span>
+                        로그인</a>&nbsp;
+                    <a class="btn btn-outline-secondary btn-sm" href="/signup">
+                        <span class="material-symbols-outlined" style="vertical-align: middle; line-height: normal; font-size: medium;">person_add</span>
+                        회원가입</a>
+                <% }%>
+            </form>
+        </div>
+    </div>
+</nav>
+<!-- <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid" style="width: 960px;">
+        <a class="navbar-brand" href="/">도서구매사이트</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <form class="d-flex">
+                <% if(signinStatus) {%>
+                    <a class="btn btn-outline-primary btn-sm" href="/cart">
+                        <span class="material-symbols-outlined" style="vertical-align: middle; line-height: normal; font-size: medium;">shopping_cart</span>
+                        장바구니</a>&nbsp;
+                    <a class="btn btn-outline-primary btn-sm" href="/mypage">마이페이지</a>&nbsp;
+                    <a class="btn btn-primary btn-sm" href="/signin">로그아웃</a>
+                <% } else {%>
+                    <a class="btn btn-outline-primary btn-sm" href="/signin">로그인</a>&nbsp;
+                    <a class="btn btn-primary btn-sm" href="/signup">회원가입</a>
+                <% }%>
+            </form>
+        </div>
+    </div>
+</nav> -->

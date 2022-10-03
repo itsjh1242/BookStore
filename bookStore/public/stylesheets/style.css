@@ -1,8 +1,25 @@
+/* Style CSS */
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+.main-book-frame{
+  width: 1380px;
+  margin: 0 auto;
+}
+
+.main-book-shadow{
+  box-shadow: 0px 0px 3px 3px rgb(197, 197, 197);
+}
+
+.main-book-card-title{
+  font-size: 16px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.main-book-card-des{
+  font-size: 12px;
+  color: grey;
 }
