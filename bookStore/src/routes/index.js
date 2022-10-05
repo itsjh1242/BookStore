@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const session = require("express-session");
 const sessionStore = require("../../db/session");
 const router = express.Router();
@@ -8,28 +8,28 @@ const pool = require("../../db/db");
 const query = require("../query/index");
 
 /* 세션 보안 */
-var options={
-  host:'localhost',
-  user: 'root',
-  password: 'itsjh0112',
+var options = {
+  host: "localhost",
+  user: "root",
+  password: "itsjh0112",
   port: 3306,
-  database: 'bookstore'
+  database: "bookstore",
 };
 
 router.use(
   session({
-      secret: 'asdqweasdasd',
-      resave: false,
-      saveUninitialized: true,
-      store: sessionStore
+    secret: "asdalknsdlkankdnl",
+    resave: false,
+    saveUninitialized: true,
+    store: sessionStore,
   })
 );
 
 /* GET home page. */
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const books = await pool.query(query.get_Books);
-    if (req.session.uid){
+    if (req.session.uid) {
       res.render("index", {
         books: books[0],
         num: books[0].length,
@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
         books: books[0],
         num: books[0].length,
         signinStatus: false,
-      })
+      });
     }
   } catch (error) {
     return res.redirect("/");
@@ -48,7 +48,7 @@ router.get('/', async (req, res) => {
 });
 
 // 책 상세정보
-router.get('/book/:book_id', async (req, res) => {
+router.get("/book/:book_id", async (req, res) => {
   try {
     if (req.session.uid) {
       const book = await pool.query(query.get_Books_detail, [
@@ -60,11 +60,13 @@ router.get('/book/:book_id', async (req, res) => {
         signinStatus: true,
       });
     } else {
-      res.send("<script>alert('로그인이 필요합니다.'); location.href='/';</script>");
+      res.send(
+        "<script>alert('로그인이 필요합니다.'); location.href='/';</script>"
+      );
     }
   } catch (error) {
-    return res.redirect('/');
+    return res.redirect("/");
   }
-})
+});
 
 module.exports = router;
