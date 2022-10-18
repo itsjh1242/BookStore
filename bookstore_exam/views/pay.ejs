@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <% include ./head.ejs %>
+  <body>
+    <% include ./nav.ejs %>
+    <% if(method === "pay") { %>
+        <form method="post">
+            <ul class="list-group paynow-list">
+                <li class="list-group-item list-group-item-dark paynow-list-title" aria-current="true">구매정보</li>
+                <li class="list-group-item" style="border-top-style: solid; border-width: 1px;"><h4><%= book.book_name %><span class="badge bg-secondary"><%= amount %>권</span></h4></li>
+            </ul>
+            <ul class="list-group paynow-list">
+                <li class="list-group-item list-group-item-dark paynow-list-title" aria-current="true">배송지정보</li>
+                <li class="list-group-item" style="border-top-style: solid; border-width: 1px;">
+                    <select name="address_id" class="form-select" aria-label="Default select example">
+                        <option selected value="false">배송지를 선택하세요</option>
+                        <% for(let i = 0; i < address.length; i++) { %>
+                            <option value="<%= address[i].address_id %>"><%= address[i].myaddr %></option>  
+                        <% } %>
+                    </select>
+                </li>
+            </ul>
+            <ul class="list-group paynow-list">
+                <li class="list-group-item list-group-item-dark paynow-list-title" aria-current="true">결제정보</li>
+                <li class="list-group-item" style="border-top-style: solid; border-width: 1px;">
+                    <span type="button" class="btn btn-light pay-info-list">총 구매 수량</span><span class="badge bg-secondary"><%= amount %>권</span></li>
+                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">총 상품 가격</span><span class="badge bg-secondary"><%= book.total_price %>원</span></li>
+                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">할인 가격</span><span class="badge bg-secondary">-</span></li>
+                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">총 결제 금액</span><span class="badge bg-secondary"><%= book.total_price %>원</span></li>
+                <li class="list-group-item" style="display: flex;">
+                    <span type="button" class="btn btn-light pay-info-list">결제방법</span>
+                    <select name="card_id" class="form-select" aria-label="Default select example">
+                        <option selected value="false">신용카드를 선택하세요</option>
+                        <% for(let i = 0; i < card.length; i++) { %>
+                            <option value="<%= card[i].card_id %>"><%= card[i].mycard %></option>  
+                        <% } %>
+                    </select>
+                </li>
+                <input name="total_price" style="display: none;" value="<%= book.total_price %>"/>
+                <input name="dc_price" style="display: none;" value="0"/>
+                <input name="total_pay_price" style="display: none;" value="<%= book.total_price %>"/>
+                <input type="submit" class="btn btn-outline-success btn-pay" value="결제하기" onclick="javascript: form.action='/book/pay/paynow/<%= book.book_id %>/<%= amount %>';"/>
+            </ul>
+        </form>
+    <% } else { %>
+        <form method="post">
+            <ul class="list-group paynow-list">
+                <li class="list-group-item list-group-item-dark paynow-list-title" aria-current="true">구매정보</li>
+                <% for(let i = 0; i < book.length; i++){ %>
+                    <li class="list-group-item" style="border-top-style: solid; border-width: 1px;"><h4><%= book[i].book_name %>&nbsp<span class="badge bg-secondary"><%= book[i].basket_bookcount %>권</span></h4></li>
+                    <input name="items" style="display: none;" value="<%= book[i].book_id %>"/>
+                    <input name="pay_amount" style="display: none;" value="<%= book[i].basket_bookcount %>"/>
+                <% } %>
+            </ul>
+            <ul class="list-group paynow-list">
+                <li class="list-group-item list-group-item-dark paynow-list-title" aria-current="true">배송지정보</li>
+                <li class="list-group-item" style="border-top-style: solid; border-width: 1px;">
+                    <select name="address_id" class="form-select" aria-label="Default select example">
+                        <option selected value="false">배송지를 선택하세요</option>
+                        <% for(let i = 0; i < address.length; i++) { %>
+                            <option value="<%= address[i].address_id %>"><%= address[i].myaddr %></option>  
+                        <% } %>
+                    </select>
+                </li>
+            </ul>
+            <ul class="list-group paynow-list">
+                <li class="list-group-item list-group-item-dark paynow-list-title" aria-current="true">결제정보</li>
+                <li class="list-group-item" style="border-top-style: solid; border-width: 1px;">
+                    <span type="button" class="btn btn-light pay-info-list">총 구매 수량</span><span class="badge bg-secondary"><%= total_amount %>권</span></li>
+                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">총 상품 가격</span><span class="badge bg-secondary"><%= total_price %>원</span></li>
+                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">할인 가격</span><span class="badge bg-secondary">-</span></li>
+                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">총 결제 금액</span><span class="badge bg-secondary"><%= total_price %>원</span></li>
+                <li class="list-group-item" style="display: flex;">
+                    <span type="button" class="btn btn-light pay-info-list">결제방법</span>
+                    <select name="card_id" class="form-select" aria-label="Default select example">
+                        <option selected value="false">신용카드를 선택하세요</option>
+                        <% for(let i = 0; i < card.length; i++) { %>
+                            <option value="<%= card[i].card_id %>"><%= card[i].mycard %></option>  
+                        <% } %>
+                    </select>
+                </li>
+                <input name="total_price" style="display: none;" value="<%= total_price %>"/>
+                <input name="dc_price" style="display: none;" value="0"/>
+                <input name="total_pay_price" style="display: none;" value="<%= total_price %>"/>
+                <input name="total_amount" style="display: none;" value="<%= total_amount %>"/>
+                <input type="submit" class="btn btn-outline-success btn-pay" value="결제하기" onclick="javascript: form.action='/basket/basketpay';"/>
+            </ul>
+        </form>    
+    <% } %>
+  </body>
+</html>

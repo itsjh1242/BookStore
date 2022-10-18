@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <% include ./head.ejs %>
+  <body>
+    <% include ./nav.ejs %>
+    <form method="post">
+        <ol class="list-group list-group-numbered">
+            <% for(let i = 0; i < order.length; i++){ %>
+                <div class="card order-list">
+                    <div class="card-header">
+                        <span class="badge bg-secondary order-item">주문번호: <%= order[i].order_id %></span>
+                        <span class="badge bg-secondary order-item order-date"><%= order[i].order_date %></span>
+                    </div>
+                    <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <div>
+                            <% if(orderAmount[i] === "1"){ %>
+                                <span class="badge bg-secondary order-item">단일 구매</span>&nbsp<%= orderBook[i] %>
+                            <% } else { %>
+                                <span class="badge bg-secondary order-item">총 구매 도서</span>&nbsp<%= orderBook[i] %> 외 <%= orderAmount[i] - 1 %>권
+                            <% } %>
+                        </div>
+                        <div>
+                            <span class="badge bg-secondary order-item">총 주문 금액</span>&nbsp<%= order[i].order_price %>원
+                            <input type="submit" class="btn btn-outline-secondary order-btn" value="상세보기" onclick="javascript: form.action='/order/detail/<%= order[i].order_id %>';"/>
+                        </div>
+                    </blockquote>
+                    </div>
+                </div>
+            <% } %>
+        </ol>
+    </form>
+  </body>
+</html>

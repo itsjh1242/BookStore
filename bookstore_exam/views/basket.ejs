@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <% include ./head.ejs %>
+  <body>
+    <% include ./nav.ejs %>
+    <form method="post">
+        <ol class="list-group list-group-numbered"><br>
+            <% for(let i = 0; i < basket.length; i++){ %>
+                <li class="list-group-item d-flex justify-content-between align-items-start basket-list">
+                    &nbsp<input name="items" class="form-check-input" type="checkbox" value="<%= basket[i].book_book_id %>" id="flexCheckDefault">
+                    <div class="ms-2 me-auto">
+                      <div class="fw-bold"><%= basket[i].book_name %></div>
+                      <span class="badge bg-secondary">단가: <%= basket[i].book_price %>원</span>
+                    </div>
+                    <span class="badge bg-primary rounded-pill"><%= basket[i].basket_bookcount %>권이 담겨있습니다.</span>&nbsp
+                    <input name="flag" type="submit" class="btn btn-outline-success" value="+" onclick="javascript: form.action='/basket/setamount/<%= basket[i].basket_basket_id %>/<%= basket[i].book_book_id %>';"/>&nbsp
+                    <input name="flag" type="submit" class="btn btn-outline-warning" value="-" onclick="javascript: form.action='/basket/setamount/<%= basket[i].basket_basket_id %>/<%= basket[i].book_book_id %>';"/>&nbsp
+                    <input type="submit" class="btn btn-danger" value="삭제" onclick="javascript: form.action='/basket/del/<%= basket[i].basket_basket_id %>/<%= basket[i].book_book_id %>';"/>
+                    <input name="basket_bookcount" style="display: none;" value="<%= basket[i].basket_bookcount %>" />
+                </li>
+            <% } %>
+            <br>
+            <input type="submit" class="btn btn-outline-primary btn-buy" value="구매하기" onclick="javascript: form.action='/basket';"/>
+        </ol>
+    </form>
+  </body>
+</html>

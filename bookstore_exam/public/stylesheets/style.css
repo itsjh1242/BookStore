@@ -1,0 +1,99 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+div > a {
+  color: grey;
+  text-decoration: none;
+}
+
+.joinInput {
+  margin: 4px 0;
+}
+
+.joinInput > span {
+  width: 6rem;
+}
+
+/* 메인 화면 */
+.search-result {
+  width: fit-content;
+}
+.search-result-badge {
+  width: fit-content;
+}
+.info-top-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.info-top {
+  width: fit-content;
+  margin-top: 12px;
+  text-align: right;
+  float: right;
+}
+
+/* BOOK DETAIL */
+.btn-book-detail {
+  display: flex;
+}
+.btn-book-detail > p {
+  margin: 0 4px;
+}
+.btn-book-detail > input {
+  width: 70px;
+}
+
+/* PAY */
+.paynow-list {
+  margin: 24px 0;
+}
+.paynow-list-title {
+  width: 120px;
+  text-align: center;
+}
+.pay-info-list {
+  width: 120px;
+  margin-right: 12px;
+}
+.btn-pay {
+  margin: 12px auto;
+}
+
+/* BASKET */
+.basket-list {
+  width: 960px;
+  margin: 0 auto;
+}
+.btn-buy {
+  width: fit-content;
+  margin: 0px auto;
+}
+
+/* MYPAGE */
+.list-item {
+  width: 80px;
+  margin-right: 12px;
+}
+
+/* ORDER */
+.order-list {
+  width: 1440px;
+  margin: 12px auto;
+}
+.order-item {
+  width: 112px;
+  margin-right: 12px;
+}
+.order-btn {
+  float: right;
+}
+.order-date {
+  width: fit-content;
+  float: right;
+}
+.order-card-info {
+  width: 120px;
+}

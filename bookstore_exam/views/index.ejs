@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <% include ./head.ejs %>
+  <body>
+    <div class="info-top-row">
+      <div class="alert alert-dark info-top" role="alert">
+        데이터베이스설계(캡스톤디자인)-101분반 개인과제용요구사항
+        도서구매사이트<br />
+        소프트웨어학과_20181495_김준현
+      </div>
+    </div>
+
+    <% include ./nav.ejs %>
+    <ol class="list-group list-group-numbered" style="margin: 12px 0">
+      <form method="post">
+        <div class="input-group mb-3">
+          <input
+            name="search"
+            type="text"
+            class="form-control"
+            placeholder="도서 검색하기"
+            aria-label="Recipient's username"
+            aria-describedby="button-addon2"
+          />
+          <input
+            class="btn btn-outline-secondary"
+            type="submit"
+            value="검색"
+            onclick="javascript: form.action='/search';"
+          />
+        </div>
+      </form>
+      <% if(keyword !== false) { %>
+      <div class="alert alert-secondary search-result" role="alert">
+        검색하신 "<%= keyword %>"와 관련된 도서 목록입니다.
+      </div>
+      <span class="badge text-bg-primary search-result-badge"
+        >검색 결과: <%= books.length %>건</span
+      >
+      <% } %> <% for(let i = 0; i < books.length; i++){ %>
+      <li
+        class="list-group-item d-flex justify-content-between align-items-start"
+      >
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">
+            <a href="/book/<%= books[i].book_id %>"
+              ><%= books[i].book_name %></a
+            >
+          </div>
+          <%= books[i].book_price %>원
+        </div>
+        <span class="badge bg-secondary rounded-pill"
+          >재고: <%= books[i].book_count %>권</span
+        >
+      </li>
+      <% } %>
+    </ol>
+  </body>
+</html>

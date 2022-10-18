@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <% include ./head.ejs %>
+  <body>
+    <% include ./nav.ejs %>
+    <div class="card text-center" style="width:480px; margin: 48px auto;">
+        <div class="card-header">
+          회원가입
+        </div>
+        <form method="post">
+            <div class="card-body">
+                <h5 class="card-title">
+                  <div class="input-group joinInput">
+                      <span class="input-group-text">아이디</span>
+                      <input type="text" name = "uid" class="form-control">
+                  </div>
+                  <div class="input-group joinInput">
+                      <span class="input-group-text">비밀번호</span>
+                      <input type="text" name = "upw" class="form-control">
+                  </div>
+                  <div class="input-group joinInput">
+                      <span class="input-group-text">성명</span>
+                      <input type="text" name = "uname" class="form-control">
+                  </div>
+                </h5>
+                <p class="card-text">도서를 구매하기 위해서는 회원으로 가입해야합니다.</p>
+            </div>
+            <div class="card-footer text-muted">
+                <input
+                    type="submit"
+                    class="btn btn-secondary"
+                    value="가입하기"
+                    onclick="javascript: form.action='/join';"
+                />
+            </div>
+        </form>
+    </div>
+  </body>
+</html>

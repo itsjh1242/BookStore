@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <% include ./head.ejs %>
+  <body>
+    <% include ./nav.ejs %>
+    <form method="post">
+        <ul class="list-group paynow-list">
+            <li class="list-group-item list-group-item-dark paynow-list-title" aria-current="true">구매도서</li>
+            <% for(let i = 0; i < orderlist.length; i++){ %>
+                <li class="list-group-item" style="border-top-style: solid; border-width: 1px;">
+                    <button type="button" class="btn btn-primary position-relative" onclick="location.href='/book/<%= orderlist[i].book_id %>';">
+                        <%= orderlist[i].book_name %>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                          <%= orderlist[i].order_bookcount %>권
+                        </span>
+                    </button>
+                    <div>
+                        <span class="badge rounded-pill text-bg-secondary">1권당 가격</span>&nbsp<%= orderlist[i].book_price %>&nbsp원
+                    </div>
+                </li>
+            <% } %>
+        </ul>
+        <ul class="list-group paynow-list">
+            <li class="list-group-item list-group-item-dark paynow-list-title" aria-current="true">배송정보</li>
+            <li class="list-group-item" style="border-top-style: solid; border-width: 1px;">
+                <div>
+                    <span class="badge rounded-pill text-bg-secondary">우편번호</span>&nbsp<%= order[0].order_postnum %>
+                </div>
+                <div>
+                    <span class="badge rounded-pill text-bg-secondary">기본주소</span>&nbsp<%= order[0].order_basicaddress %>
+                </div>
+                <div>
+                    <span class="badge rounded-pill text-bg-secondary">상세주소</span>&nbsp<%= order[0].order_detailaddress %>
+                </div>
+            </li>
+        </ul>
+        <ul class="list-group paynow-list">
+            <li class="list-group-item list-group-item-dark paynow-list-title" aria-current="true">결제정보</li>
+            <li class="list-group-item" style="border-top-style: solid; border-width: 1px;">
+                <div>
+                    <span class="badge rounded-pill text-bg-secondary order-card-info">결제 일시</span>&nbsp<%= order[0].order_date %>
+                </div>
+                <div>
+                    <span class="badge rounded-pill text-bg-secondary order-card-info">총 결제 금액</span>&nbsp<%= order[0].order_price %>
+                </div>
+                <div>
+                    <span class="badge rounded-pill text-bg-secondary order-card-info">총 구매 도서</span>&nbsp<%= orderAmount %>권
+                </div>
+                <div>
+                    <span class="badge rounded-pill text-bg-secondary order-card-info">결제 카드 번호</span>&nbsp<%= order[0].order_card_num %>
+                </div>
+                <div>
+                    <span class="badge rounded-pill text-bg-secondary order-card-info">결제 카드 유효기간</span>&nbsp<%= order[0].order_card_date %>
+                </div>
+                <div>
+                    <span class="badge rounded-pill text-bg-secondary order-card-info">결제 카드 유형</span>&nbsp<%= order[0].order_card_type %>
+                </div>
+            </li>
+        </ul>
+    </form>
+  </body>
+</html>
