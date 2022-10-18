@@ -24,9 +24,9 @@
                 <li class="list-group-item list-group-item-dark paynow-list-title" aria-current="true">결제정보</li>
                 <li class="list-group-item" style="border-top-style: solid; border-width: 1px;">
                     <span type="button" class="btn btn-light pay-info-list">총 구매 수량</span><span class="badge bg-secondary"><%= amount %>권</span></li>
-                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">총 상품 가격</span><span class="badge bg-secondary"><%= book.total_price %>원</span></li>
+                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">총 상품 가격</span><span class="badge bg-secondary"><%= book.total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</span></li>
                 <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">할인 가격</span><span class="badge bg-secondary">-</span></li>
-                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">총 결제 금액</span><span class="badge bg-secondary"><%= book.total_price %>원</span></li>
+                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">총 결제 금액</span><span class="badge bg-secondary"><%= book.total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</span></li>
                 <li class="list-group-item" style="display: flex;">
                     <span type="button" class="btn btn-light pay-info-list">결제방법</span>
                     <select name="card_id" class="form-select" aria-label="Default select example">
@@ -67,9 +67,9 @@
                 <li class="list-group-item list-group-item-dark paynow-list-title" aria-current="true">결제정보</li>
                 <li class="list-group-item" style="border-top-style: solid; border-width: 1px;">
                     <span type="button" class="btn btn-light pay-info-list">총 구매 수량</span><span class="badge bg-secondary"><%= total_amount %>권</span></li>
-                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">총 상품 가격</span><span class="badge bg-secondary"><%= total_price %>원</span></li>
+                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">총 상품 가격</span><span class="badge bg-secondary"><%= total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</span></li>
                 <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">할인 가격</span><span class="badge bg-secondary">-</span></li>
-                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">총 결제 금액</span><span class="badge bg-secondary"><%= total_price %>원</span></li>
+                <li class="list-group-item"><span type="button" class="btn btn-light pay-info-list">총 결제 금액</span><span class="badge bg-secondary"><%= total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</span></li>
                 <li class="list-group-item" style="display: flex;">
                     <span type="button" class="btn btn-light pay-info-list">결제방법</span>
                     <select name="card_id" class="form-select" aria-label="Default select example">

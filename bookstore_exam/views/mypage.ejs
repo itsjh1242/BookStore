@@ -27,11 +27,11 @@
                 <a href="#" class="list-group-item list-group-item-action">
                     <div class="input-group mb-3">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon1">우편번호</button>
-                        <input name="new_post" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <input name="new_post" type="text" class="form-control">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon1">기본주소</button>
-                        <input name="new_basic" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <input name="new_basic" type="text" class="form-control">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon1">상세주소</button>
-                        <input name="new_detail" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <input name="new_detail" type="text" class="form-control">
                     </div>
                     <input type="submit" class="btn btn-outline-success" value="배송지추가" onclick="javascript: form.action='/mypage/addaddress';"/>
                 </a>
@@ -45,7 +45,7 @@
                 <% for(let i = 0; i < card.length; i++){ %>
                     <a href="#" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1"><span class="badge bg-secondary list-item">카드번호</span><%= card[i].card_num %></h5>
+                        <h5 class="mb-1"><span class="badge bg-secondary list-item">카드번호</span><%= card[i].card_num.toString().replace(/\B(?=(\d{4})+(?!\d))/g, "-") %></h5>
                         <small class="text-muted"><input type="submit" class="btn btn-outline-danger" value="삭제" onclick="javascript: form.action='/mypage/delcard/<%= card[i].card_id %>';"/></small>
                         </div>
                         <h5 class="mb-1"><span class="badge bg-secondary list-item">유효기간</span><%= card[i].card_date %></h5>
@@ -55,11 +55,11 @@
                 <a href="#" class="list-group-item list-group-item-action">
                     <div class="input-group mb-3">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon1">카드번호</button>
-                        <input name="new_num" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <input name="new_num" type="text" class="form-control">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon1">유효기간</button>
-                        <input name="new_date" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <input name="new_date" type="text" class="form-control">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon1">유형</button>
-                        <input name="new_type" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <input name="new_type" type="text" class="form-control">
                     </div>
                     <input type="submit" class="btn btn-outline-success" value="카드추가" onclick="javascript: form.action='/mypage/addcard';"/>
                 </a>

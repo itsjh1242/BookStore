@@ -21,7 +21,7 @@ router.get("/", async function (req, res, next) {
       });
       // 로그인이 안되어 있을 시
     } else {
-      return res.render("index", {
+      return res.render("exam/index", {
         signinStatus: false,
         books: books[0],
         keyword: false,
@@ -31,8 +31,6 @@ router.get("/", async function (req, res, next) {
     console.log(error);
   }
 });
-
-
 
 // 회원가입
 router.get("/join", indexCtrl.join);

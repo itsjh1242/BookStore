@@ -10,7 +10,7 @@
                     &nbsp<input name="items" class="form-check-input" type="checkbox" value="<%= basket[i].book_book_id %>" id="flexCheckDefault">
                     <div class="ms-2 me-auto">
                       <div class="fw-bold"><%= basket[i].book_name %></div>
-                      <span class="badge bg-secondary">단가: <%= basket[i].book_price %>원</span>
+                      <span class="badge bg-secondary">단가: <%= basket[i].book_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</span>
                     </div>
                     <span class="badge bg-primary rounded-pill"><%= basket[i].basket_bookcount %>권이 담겨있습니다.</span>&nbsp
                     <input name="flag" type="submit" class="btn btn-outline-success" value="+" onclick="javascript: form.action='/basket/setamount/<%= basket[i].basket_basket_id %>/<%= basket[i].book_book_id %>';"/>&nbsp

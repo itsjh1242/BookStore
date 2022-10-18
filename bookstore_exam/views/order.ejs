@@ -21,7 +21,7 @@
                             <% } %>
                         </div>
                         <div>
-                            <span class="badge bg-secondary order-item">총 주문 금액</span>&nbsp<%= order[i].order_price %>원
+                            <span class="badge bg-secondary order-item">총 주문 금액</span>&nbsp<%= order[i].order_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원
                             <input type="submit" class="btn btn-outline-secondary order-btn" value="상세보기" onclick="javascript: form.action='/order/detail/<%= order[i].order_id %>';"/>
                         </div>
                     </blockquote>

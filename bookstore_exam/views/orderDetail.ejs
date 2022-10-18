@@ -15,7 +15,7 @@
                         </span>
                     </button>
                     <div>
-                        <span class="badge rounded-pill text-bg-secondary">1권당 가격</span>&nbsp<%= orderlist[i].book_price %>&nbsp원
+                        <span class="badge rounded-pill text-bg-secondary">1권당 가격</span>&nbsp<%= orderlist[i].book_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>&nbsp원
                     </div>
                 </li>
             <% } %>
@@ -41,13 +41,13 @@
                     <span class="badge rounded-pill text-bg-secondary order-card-info">결제 일시</span>&nbsp<%= order[0].order_date %>
                 </div>
                 <div>
-                    <span class="badge rounded-pill text-bg-secondary order-card-info">총 결제 금액</span>&nbsp<%= order[0].order_price %>
+                    <span class="badge rounded-pill text-bg-secondary order-card-info">총 결제 금액</span>&nbsp<%= order[0].order_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>
                 </div>
                 <div>
                     <span class="badge rounded-pill text-bg-secondary order-card-info">총 구매 도서</span>&nbsp<%= orderAmount %>권
                 </div>
                 <div>
-                    <span class="badge rounded-pill text-bg-secondary order-card-info">결제 카드 번호</span>&nbsp<%= order[0].order_card_num %>
+                    <span class="badge rounded-pill text-bg-secondary order-card-info">결제 카드 번호</span>&nbsp<%= order[0].order_card_num.toString().replace(/\B(?=(\d{4})+(?!\d))/g, "-") %>
                 </div>
                 <div>
                     <span class="badge rounded-pill text-bg-secondary order-card-info">결제 카드 유효기간</span>&nbsp<%= order[0].order_card_date %>

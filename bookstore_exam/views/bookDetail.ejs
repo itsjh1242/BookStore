@@ -11,7 +11,7 @@
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title"><%= book.book_name %></h5>
-              <p class="card-text"><span class="material-icons">sell</span>&nbsp<%= book.book_price %>원</p>
+              <p class="card-text"><span class="material-icons">sell</span>&nbsp<%= book.book_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</p>
               <p class="card-text"><span class="badge bg-secondary"><%= book.book_count %></span>권 남음</p>
               <form method="post">
                 <div class="btn-book-detail">

@@ -19,7 +19,7 @@ var options = {
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "011200",
+  password: "0112",
   database: "bookstore1",
 };
 

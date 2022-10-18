@@ -9,9 +9,8 @@
         소프트웨어학과_20181495_김준현
       </div>
     </div>
-
     <% include ./nav.ejs %>
-    <ol class="list-group list-group-numbered" style="margin: 12px 0">
+    <ol class="list-group list-group-numbered" style="margin: 16px 0">
       <form method="post">
         <div class="input-group mb-3">
           <input
@@ -20,39 +19,36 @@
             class="form-control"
             placeholder="도서 검색하기"
             aria-label="Recipient's username"
-            aria-describedby="button-addon2"
-          />
+            aria-describedby="button-addon2"/>
           <input
             class="btn btn-outline-secondary"
             type="submit"
             value="검색"
-            onclick="javascript: form.action='/search';"
-          />
+            onclick="javascript: form.action='/search';"/>
         </div>
       </form>
       <% if(keyword !== false) { %>
-      <div class="alert alert-secondary search-result" role="alert">
-        검색하신 "<%= keyword %>"와 관련된 도서 목록입니다.
-      </div>
-      <span class="badge text-bg-primary search-result-badge"
-        >검색 결과: <%= books.length %>건</span
-      >
-      <% } %> <% for(let i = 0; i < books.length; i++){ %>
-      <li
-        class="list-group-item d-flex justify-content-between align-items-start"
-      >
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">
-            <a href="/book/<%= books[i].book_id %>"
-              ><%= books[i].book_name %></a
-            >
-          </div>
-          <%= books[i].book_price %>원
+        <div class="alert alert-secondary search-result" role="alert">
+          검색하신 "<%= keyword %>"와 관련된 도서 목록입니다.
         </div>
-        <span class="badge bg-secondary rounded-pill"
-          >재고: <%= books[i].book_count %>권</span
-        >
-      </li>
+        <span class="badge text-bg-primary search-result-badge search-result">검색 결과: <%= books.length %>건</span>
+      <% } else { %>
+        <div class="main-orderby-select">
+          <a>인기순</a>
+          <a>판매순</a>
+          <a>리뷰순</a>
+        </div>
+      <% } %> 
+      <% for(let i = 0; i < books.length; i++){ %>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">
+              <a href="/book/<%= books[i].book_id %>"><%= books[i].book_name %></a>
+            </div>
+            <%= books[i].book_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원
+          </div>
+          <span class="badge bg-secondary rounded-pill">재고: <%= books[i].book_count %>권</span>
+        </li>
       <% } %>
     </ol>
   </body>

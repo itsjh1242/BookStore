@@ -54,11 +54,12 @@ exports.pay = async (req, res) => {
 // 바로구매 결제하기
 exports.paynow = async (req, res) => {
     try{
-        let today = new Date();
-        let year = today.getFullYear().toString();
-        let month = (today.getMonth() + 1).toString();
-        let date = today.getDate().toString();
-        let makeDate = year.concat("/", month).concat("/", date);
+        let today = new Date();   
+        let year = today.getFullYear(); // 년도
+        let month = today.getMonth() + 1;  // 월
+        let date = today.getDate();  // 날짜
+        let makeDate = year + '/' + month + '/' + date;
+
         let { total_price, dc_price, total_pay_price, address_id, card_id } = req.body;
         let { book_id, pay_amount } = req.params; 
         // 배송지 & 카드 정보 가져오기
@@ -86,11 +87,11 @@ exports.paynow = async (req, res) => {
 exports.addBasket = async (req, res) => {
     try{
         if(req.session.uid){
-            let today = new Date();
-            let year = today.getFullYear().toString();
-            let month = (today.getMonth() + 1).toString();
-            let date = today.getDate().toString();
-            let makeDate = year.concat("/", month).concat("/", date);
+            let today = new Date();   
+            let year = today.getFullYear(); // 년도
+            let month = today.getMonth() + 1;  // 월
+            let date = today.getDate();  // 날짜
+            let makeDate = year + '/' + month + '/' + date;
             let { book_id } = req.params;
             let { pay_amount } = req.body;
             // 장바구니가 존재하는지 확인 후 없으면 생성
