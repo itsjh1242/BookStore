@@ -36,15 +36,29 @@
       <span class="badge text-bg-primary search-result-badge"
         >검색 결과: <%= books.length %>건</span
       >
+      <% } else { %>
+      <div class="main-orderby-select">
+        <a>전체도서</a>
+        <a>인기순</a>
+        <a>판매순</a>
+        <a>리뷰순</a>
+      </div>
       <% } %> <% for(let i = 0; i < books.length; i++){ %>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
+      <li
+        class="list-group-item d-flex justify-content-between align-items-start"
+      >
         <div class="ms-2 me-auto">
           <div class="fw-bold">
-            <a href="/book/<%= books[i].book_id %>"><%= books[i].book_name %></a>
+            <a href="/book/<%= books[i].book_id %>"
+              ><%= books[i].book_name %></a
+            >
           </div>
-          <%= books[i].book_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원
+          <%= books[i].book_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,
+          ",") %>원
         </div>
-        <span class="badge bg-secondary rounded-pill">재고: <%= books[i].book_count %>권</span>
+        <span class="badge bg-secondary rounded-pill"
+          >재고: <%= books[i].book_count %>권</span
+        >
       </li>
       <% } %>
     </ol>

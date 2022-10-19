@@ -14,7 +14,7 @@ router.get("/", async function (req, res, next) {
     // SigninStatus: 세션을 통해 로그인 여부가 확인되면 true값을 주어 로그인 된 화면을 다르게 나타낸다.
     // keyword: 검색 기능 차단 - keyword가 true일때와 false일때의 화면을 다르게 나타내기 위한 BOOLEAN
     if (req.session.uid) {
-      return res.render("index", {
+      return res.render("exam/index", {
         signinStatus: true,
         books: books[0],
         keyword: false,
