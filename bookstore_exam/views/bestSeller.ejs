@@ -1,0 +1,20 @@
+
+<div class="itsjh-card-row">
+    <% for(let i = 0; i < bestseller.length; i++) { %>
+        <div class="itsjh-card">
+            <div class="itsjh-card-content">
+            <div class="itsjh-card-details">
+                <h2><%= bestseller[i].book_name %><br><span>누적판매 <%= i + 1 %>등 </span></h2>
+                <div class="itsjh-card-data">
+                <h3>좋아요<br><span><%= bestsellerLike[i] %>개</span></h3>
+                <h3>2<br><span>2</span></h3>
+                <h3>-<br><span>-</span></h3>
+                </div>
+                <div class="itsjh-card-btn">
+                <button>상세보기</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    <% } %>
+</div>

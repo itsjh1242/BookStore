@@ -39,7 +39,7 @@
                 <input name="total_price" style="display: none;" value="<%= book.total_price %>"/>
                 <input name="dc_price" style="display: none;" value="0"/>
                 <input name="total_pay_price" style="display: none;" value="<%= book.total_price %>"/>
-                <input type="submit" class="btn btn-outline-success btn-pay" value="결제하기" onclick="javascript: form.action='/book/pay/paynow/<%= book.book_id %>/<%= amount %>';"/>
+                <input type="submit" class="btn btn-outline-success btn-pay flip-horizontal-bottom" value="결제하기" onclick="javascript: form.action='/book/pay/paynow/<%= book.book_id %>/<%= amount %>';"/>
             </ul>
         </form>
     <% } else { %>
@@ -83,7 +83,7 @@
                 <input name="dc_price" style="display: none;" value="0"/>
                 <input name="total_pay_price" style="display: none;" value="<%= total_price %>"/>
                 <input name="total_amount" style="display: none;" value="<%= total_amount %>"/>
-                <input type="submit" class="btn btn-outline-success btn-pay" value="결제하기" onclick="javascript: form.action='/basket/basketpay';"/>
+                <input type="submit" class="btn btn-outline-success btn-pay flip-horizontal-bottom" value="결제하기" onclick="javascript: form.action='/basket/basketpay';"/>
             </ul>
         </form>    
     <% } %>

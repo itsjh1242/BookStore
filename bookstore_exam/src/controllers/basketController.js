@@ -124,20 +124,35 @@ exports.basketPay = async (req, res) => {
         const createOrder = await pool.query('INSERT INTO bookstore1.order VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
             null, total_pay_price, makeDate, getPayInfo[0][0].card_type, getPayInfo[0][0].card_num, getPayInfo[0][0].card_date, getPayInfo[0][0].address_postnum, getPayInfo[0][0].address_basicaddress, getPayInfo[0][0].address_detailaddress, req.session.uid
         ]);
-        // 장바구니에 도서가 1개 이상일 수 있기 때문에 반복문을 사용해야 함
-        // 주문 내역 등록 및 장바구니 목록 삭제
-        for(let i = 0; i < items.length; i++){
+        // 사용자가 장바구니에서 도서 한 파트만 선택했을 경우
+        if(typeof items === "string"){
             const createOrderList = await pool.query('INSERT INTO order_list VALUES ((SELECT MAX(order_id) AS id FROM bookstore1.order WHERE user_user_id = ?), ?, ?)', [
-                req.session.uid, items[i], pay_amount[i]
+                req.session.uid, items, pay_amount
             ]);
             // 장바구니 목록 삭제
             const delBasketList = await pool.query('DELETE FROM basket_list WHERE basket_basket_id = (SELECT basket_id FROM basket WHERE user_user_id = ?) AND book_book_id = ?', [
-                req.session.uid, items[i]
+                req.session.uid, items
             ]);
-        // 책 수량 증감
-            const setBookAmount = await pool.query('UPDATE book SET book_count = book_count - ? WHERE book_id = ?', [
-                pay_amount[i], items[i]
+            // 책 수량 증감
+            const setBookAmount = await pool.query('UPDATE book SET book_count = book_count - ?, book_salesrate = book_salesrate + ? WHERE book_id = ?', [
+                pay_amount, pay_amount, items 
             ]);
+        } else {
+            // 장바구니에 도서가 1개 이상일 수 있기 때문에 반복문을 사용해야 함
+            // 주문 내역 등록 및 장바구니 목록 삭제
+            for(let i = 0; i < items.length; i++){
+                const createOrderList = await pool.query('INSERT INTO order_list VALUES ((SELECT MAX(order_id) AS id FROM bookstore1.order WHERE user_user_id = ?), ?, ?)', [
+                    req.session.uid, items[i], pay_amount[i]
+                ]);
+                // 장바구니 목록 삭제
+                const delBasketList = await pool.query('DELETE FROM basket_list WHERE basket_basket_id = (SELECT basket_id FROM basket WHERE user_user_id = ?) AND book_book_id = ?', [
+                    req.session.uid, items[i]
+                ]);
+                // 책 수량 증감
+                const setBookAmount = await pool.query('UPDATE book SET book_count = book_count - ?, book_salesrate = book_salesrate + ? WHERE book_id = ?', [
+                    pay_amount[i], pay_amount[i], items[i],
+                ]);
+            }
         }
         // 장바구니 목록에 아무것도 없으면 장바구니를 삭제
         const isBasketListEmpty = await pool.query('SELECT * FROM basket_list WHERE basket_basket_id = (SELECT basket_id FROM basket WHERE user_user_id = ?)', [

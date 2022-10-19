@@ -17,6 +17,9 @@ router.post('/pay/paynow/:book_id/:pay_amount', bookCtrl.paynow);
 // 장바구니 담기
 router.post('/addBasket/:book_id', bookCtrl.addBasket);
 
+// 책 좋아요
+router.post('/like/:book_id', bookCtrl.pushLike);
+
 
 
 module.exports = router;

@@ -19,10 +19,11 @@ var options = {
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "itsjh0112",
+  password: "011200",
   database: "bookstore1",
 };
-
+// bookstore_exam
+// bookstore1
 var sessionStore = new MySQLStore(options);
 
 app.use(

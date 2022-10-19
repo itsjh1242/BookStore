@@ -10,10 +10,15 @@ exports.bookDetail = async (req, res) => {
         const book = await pool.query('SELECT * FROM book WHERE book_id = ?', [
             book_id
         ]);
+        // 좋아요 수
+        const book_like = await pool.query('SELECT COUNT(*) AS like_amount FROM booklike WHERE book_like = 0 AND book_book_id = ?;', [
+            book_id
+        ])
         return res.render('bookDetail', {
             signinStatus: flag,
             book: book[0][0],
             bookid: book_id,
+            like: book_like[0][0].like_amount,
         });
     } catch (error) {
         console.log(error);
@@ -122,6 +127,31 @@ exports.addBasket = async (req, res) => {
             return res.send("<script>alert('장바구니에 담았습니다.'); location.href='/';</script>")
         } else {
             return res.send('<script>alert("로그인 먼저 해주세요.");location.href="/signin";</script>');
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// 좋아요
+exports.pushLike = async (req, res) => {
+    try {
+        if(req.session.uid){
+            // 먼저 사용자가 해당 책에 좋아요를 눌렀는지 확인하기
+            let { book_id } = req.params;
+            const isLiked = await pool.query('SELECT * FROM booklike WHERE user_user_id = ? AND book_book_id = ?', [
+                req.session.uid, book_id
+            ]);
+            if(isLiked[0].length === 0){
+                const createLike = await pool.query('INSERT INTO booklike VALUES (null, 0, ?, ?)', [
+                    req.session.uid, book_id
+                ]);
+            } else {
+                return res.send('<script>alert("이미 좋아요를 눌렀습니다!"); history.go(-1);</script>');
+            }
+            return res.redirect("/book/" + book_id);
+        } else {
+            return res.send('<script>alert("먼저 로그인을 해주세요!"); location.href="/join";</script>');
         }
     } catch (error) {
         console.log(error);

@@ -259,8 +259,8 @@ router.get("/test", async (req, res) => {
 
           console.log(name[i], price[i], discprice[i]);
           let book = await pool.query(
-              "INSERT INTO book VALUES(null, ?, ?, ?);",
-              [t_name, parseInt(t_price), parseInt(t_discprice)]
+              "INSERT INTO book VALUES(null, ?, ?, ?, ?);",
+              [t_name, parseInt(t_price), parseInt(t_discprice), 0]
           );
       }
       return res.redirect("/");

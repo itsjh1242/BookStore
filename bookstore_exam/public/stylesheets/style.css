@@ -103,12 +103,19 @@ div > a {
 /* BOOK DETAIL */
 .btn-book-detail {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .btn-book-detail > p {
   margin: 0 4px;
 }
 .btn-book-detail > input {
   width: 70px;
+}
+.btn-book-like
+{
+  width:100%;
+  margin: 4px auto;
 }
 
 /* PAY */

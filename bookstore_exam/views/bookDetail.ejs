@@ -3,26 +3,31 @@
     <% include ./head.ejs %>
   <body>
     <% include ./nav.ejs %>
-    <div class="card mb-3" style="max-width: 540px; margin: 48px auto;">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="/images/book.png" class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title"><%= book.book_name %></h5>
-              <p class="card-text"><span class="material-icons">sell</span>&nbsp<%= book.book_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</p>
-              <p class="card-text"><span class="badge bg-secondary"><%= book.book_count %></span>권 남음</p>
-              <form method="post">
-                <div class="btn-book-detail">
-                  <input name="pay_amount" type="number" class="form-control" value="1" min="1" max="<%= book.book_count %>">
-                  <p class="card-text"><input type="submit" class="btn btn-outline-primary" value="바로구매" onclick="javascript: form.action='/book/pay/<%= book.book_id %>';"/></p>
-                  <p class="card-text"><input type="submit" class="btn btn-outline-primary" value="장바구니" onclick="javascript: form.action='/book/addBasket/<%= book.book_id %>';"/></p>
-                </div>
-              </form>
+    <form method="post">
+      <div class="card mb-3" style="max-width: 540px; margin: 48px auto;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="/images/book.png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= book.book_name %></h5>
+                <p class="card-text"><span class="material-icons">sell</span>&nbsp<%= book.book_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>원</p>
+                <p class="card-text"><span class="badge bg-secondary">재고량</span>&nbsp<%= book.book_count %>권</p>
+                <p class="card-text"><span class="badge bg-secondary">판매량</span>&nbsp<%= book.book_salesrate %>권</p>
+                <p class="card-text"><span class="badge bg-secondary">좋아요</span>&nbsp<%= like %>개</p>
+                <form method="post">
+                  <div class="btn-book-detail">
+                    <input name="pay_amount" type="number" class="form-control" value="1" min="1" max="<%= book.book_count %>">
+                    <p class="card-text"><button type="submit" class="btn btn-outline-primary flip-horizontal-bottom" onclick="javascript: form.action='/book/pay/<%= book.book_id %>';"><span class="material-icons">paid</span>바로구매</button></p>
+                    <p class="card-text"><button type="submit" class="btn btn-outline-primary flip-horizontal-bottom" onclick="javascript: form.action='/book/addBasket/<%= book.book_id %>';"><span class="material-icons">shopping_cart</span>장바구니</button></p>
+                  </div>
+                  <button type="submit" class="btn btn-outline-danger btn-book-like" onclick="javascript: form.action='/book/like/<%= book.book_id %>';"><span class="material-icons">favorite</span>좋아요</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </form>
   </body>
 </html>

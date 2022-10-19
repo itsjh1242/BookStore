@@ -30,13 +30,16 @@
         </div>
       </form>
       <% if(keyword !== false) { %>
-      <div class="alert alert-secondary search-result" role="alert">
-        검색하신 "<%= keyword %>"와 관련된 도서 목록입니다.
-      </div>
-      <span class="badge text-bg-primary search-result-badge"
-        >검색 결과: <%= books.length %>건</span
-      >
+        <div class="alert alert-secondary search-result" role="alert">
+          검색하신 "<%= keyword %>"와 관련된 도서 목록입니다.
+        </div>
+        <span class="badge text-bg-primary search-result-badge"
+          >검색 결과: <%= books.length %>건</span
+        >
       <% } else { %>
+
+        <% include ../bestseller.ejs %>
+      
       <div class="main-orderby-select">
         <a>전체도서</a>
         <a>인기순</a>
