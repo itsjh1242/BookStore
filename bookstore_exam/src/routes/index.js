@@ -40,6 +40,7 @@ router.get("/", async function (req, res, next) {
         books: books[0],
         keyword: false,
         bestseller: getBestseller[0],
+        bestsellerLike: like,
       });
     }
   } catch (error) {
