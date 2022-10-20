@@ -16,18 +16,41 @@
                 <p class="card-text"><span class="badge bg-secondary">재고량</span>&nbsp<%= book.book_count %>권</p>
                 <p class="card-text"><span class="badge bg-secondary">판매량</span>&nbsp<%= book.book_salesrate %>권</p>
                 <p class="card-text"><span class="badge bg-secondary">좋아요</span>&nbsp<%= like %>개</p>
-                <form method="post">
-                  <div class="btn-book-detail">
-                    <input name="pay_amount" type="number" class="form-control" value="1" min="1" max="<%= book.book_count %>">
-                    <p class="card-text"><button type="submit" class="btn btn-outline-primary flip-horizontal-bottom" onclick="javascript: form.action='/book/pay/<%= book.book_id %>';"><span class="material-icons">paid</span>바로구매</button></p>
-                    <p class="card-text"><button type="submit" class="btn btn-outline-primary flip-horizontal-bottom" onclick="javascript: form.action='/book/addBasket/<%= book.book_id %>';"><span class="material-icons">shopping_cart</span>장바구니</button></p>
-                  </div>
-                  <button type="submit" class="btn btn-outline-danger btn-book-like" onclick="javascript: form.action='/book/like/<%= book.book_id %>';"><span class="material-icons">favorite</span>좋아요</button>
-                </form>
+                <div class="btn-book-detail">
+                  <input name="pay_amount" type="number" class="form-control" value="1" min="1" max="<%= book.book_count %>">
+                  <p class="card-text"><button type="submit" class="btn btn-outline-primary flip-horizontal-bottom" onclick="javascript: form.action='/book/pay/<%= book.book_id %>';"><span class="material-icons">paid</span>바로구매</button></p>
+                  <p class="card-text"><button type="submit" class="btn btn-outline-primary flip-horizontal-bottom" onclick="javascript: form.action='/book/addBasket/<%= book.book_id %>';"><span class="material-icons">shopping_cart</span>장바구니</button></p>
+                </div>
+                <button type="submit" class="btn btn-outline-danger btn-book-like" onclick="javascript: form.action='/book/like/<%= book.book_id %>';"><span class="material-icons">favorite</span>좋아요</button>
               </div>
             </div>
           </div>
+      </div>
+      <div class="book-review-container">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><span>구매한 사람들의 리뷰</span></li>
+          <% if(review.length === 0){ %>
+            <li class="list-group-item">아직 리뷰가 없습니다!</li>
+          <% } else { %>
+            <% for(let i = 0; i < review.length; i++){ %>
+              <li class="list-group-item">
+                <div class="review-box">
+                  <div>
+                    <%= i+1 %>.&nbsp<span class="badge rounded-pill text-bg-primary" style="font-size: 16px;"><%= review[i].user_name %></span>&nbsp<%= review[i].book_review %>
+                  </div>
+                  <% if(review[i].user_id === user_id){ %>
+                    <button type="submit" class="btn btn-outline-danger btn-delete" onclick="javascript: form.action='/book/review/del/<%= review[i].book_review_id %>/<%= book.book_id %>';">삭제</button>
+                  <% } %>
+                </div>
+              </li>
+            <% } %>
+          <% } %>
+        </ul>
+        <div class="input-group mb-3">
+          <input name="review" type="text" class="form-control" placeholder="구매평을 작성해주세요!">
+          <button class="btn btn-outline-secondary" type="submit" id="button-addon2" onclick="javascript: form.action='/book/review/<%= book.book_id %>';">등록</button>
         </div>
-      </form>
+      </div>
+    </form>
   </body>
 </html>

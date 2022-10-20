@@ -117,6 +117,37 @@ div > a {
   width:100%;
   margin: 4px auto;
 }
+.book-review-container
+{
+  width: 1440px;
+  margin: 0 auto;
+}
+.book-review-container .review-box
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.book-review-container .review-box .btn-delete
+{
+  width: fit-content;
+  margin: 0 0;
+}
+.book-review-container span
+{
+  font-size: 36px;
+}
+.book-review-container div input
+{
+  margin: 12px 0;
+}
+.book-review-container div button
+{
+  margin: 12px 0;
+}
+
+
+
 
 /* PAY */
 .paynow-list {

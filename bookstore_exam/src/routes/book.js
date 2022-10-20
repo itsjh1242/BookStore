@@ -20,6 +20,11 @@ router.post('/addBasket/:book_id', bookCtrl.addBasket);
 // 책 좋아요
 router.post('/like/:book_id', bookCtrl.pushLike);
 
+// 리뷰 등록
+router.post('/review/:book_id', bookCtrl.addReview);
+// 리뷰 삭제
+router.post('/review/del/:review_id/:book_id', bookCtrl.deleteReview);
+
 
 
 module.exports = router;

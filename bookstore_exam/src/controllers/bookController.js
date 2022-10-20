@@ -1,12 +1,19 @@
+
 const pool = require("../../db/db");
+const router = require("../routes/book");
+
+
 
 exports.bookDetail = async (req, res) => {
     try{
+        // 로그인한 사용자가 작성한 댓글이 맞는지 확인
+        // 로그인 했는지 확인
         let flag = false;
+        // params 주소값 가져오기
+        let { book_id } = req.params;
         if(req.session.uid){
             flag = true
         }
-        let { book_id } = req.params;
         const book = await pool.query('SELECT * FROM book WHERE book_id = ?', [
             book_id
         ]);
@@ -14,11 +21,18 @@ exports.bookDetail = async (req, res) => {
         const book_like = await pool.query('SELECT COUNT(*) AS like_amount FROM booklike WHERE book_like = 0 AND book_book_id = ?;', [
             book_id
         ])
+        // 리뷰 가져오기
+        const getReview = await pool.query('SELECT * FROM bookreview AS A JOIN bookstore1.user AS B ON A.user_user_id = B.user_id WHERE book_book_id = ? ORDER BY book_review_id', [
+            book_id
+        ]);
+        // 
         return res.render('bookDetail', {
             signinStatus: flag,
             book: book[0][0],
             bookid: book_id,
             like: book_like[0][0].like_amount,
+            review: getReview[0],
+            user_id: req.session.uid,
         });
     } catch (error) {
         console.log(error);
@@ -153,6 +167,61 @@ exports.pushLike = async (req, res) => {
         } else {
             return res.send('<script>alert("먼저 로그인을 해주세요!"); location.href="/join";</script>');
         }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// 리뷰 등록
+exports.addReview = async (req, res) => {
+    try{
+        let { book_id } = req.params;
+        let { review } = req.body;
+        let user_bought = [];
+        if(req.session.uid){
+            // 리뷰가 빈 내용일 때
+            if(review === ""){
+                return res.send('<script>alert("작성된 내용이 없습니다!"); history.go(-1);</script>');
+            }
+            // 사용자가 주문한 주문 번호를 전부 가져온다
+            const getOrder = await pool.query('SELECT order_id FROM bookstore1.order WHERE user_user_id = ?', [
+                req.session.uid
+            ]);
+            // 주문 번호를 이용해서 책 번호 찾기
+            for(let i = 0; i < getOrder[0].length; i++){
+                const getBooks = await pool.query('SELECT book_book_id FROM order_list WHERE order_order_id = ?', [
+                    getOrder[0][i].order_id
+                ]);
+                for(let j = 0; j < getBooks[0].length; j++){
+                    if(!(user_bought.includes(getBooks[0][j].book_book_id))){
+                        user_bought.push(getBooks[0][j].book_book_id);
+                    }
+                }
+            }
+            // 사용자가 리뷰를 남기려는 책을 사용자가 구매 하였을 때
+            if(user_bought.includes(parseInt(book_id))){
+                const addReview = await pool.query('INSERT INTO bookreview VALUES (null, ?, ?, ?)', [
+                    review, req.session.uid, book_id
+                ]);
+                return res.redirect('/book/' + book_id);
+            } else {
+                return res.send('<script>alert("책을 구매하지 않으셨습니다!"); history.go(-1);</script>');
+            }
+        } else {
+            return res.send('<script>alert("로그인을 해야합니다!"); history.go(-1);</script>');
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.deleteReview = async (req, res) => {
+    try {
+        let { review_id, book_id } = req.params;
+        const delReview = await pool.query('DELETE FROM bookreview WHERE book_review_id = ?', [
+            review_id
+        ]);
+        return res.redirect('/book/' + book_id);
     } catch (error) {
         console.log(error);
     }
